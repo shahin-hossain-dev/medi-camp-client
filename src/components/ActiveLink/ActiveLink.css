@@ -1,0 +1,28 @@
+.nav-item {
+    position: relative;
+  }
+ 
+  .nav-item::after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    
+    background: #FFFFFF;
+    position: absolute;
+   
+    bottom: -8px;
+    left: 0;
+    border-radius: 1px;
+  }
+  .nav-non-select:hover::after{
+    content: "";
+    width: 100%;
+    height: 3px;
+    
+    background: #FFFFFF;
+    position: absolute;
+   
+    bottom: -8px;
+    left: 0;
+    border-radius: 1px;
+}
