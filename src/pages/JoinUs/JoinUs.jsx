@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import googleLogo from "../../assets/icons/google.png";
 import useAuth from "../../hooks/useAuth";
@@ -8,9 +8,12 @@ import useAlert from "../../hooks/useAlert";
 
 const JoinUs = () => {
   const { userLogin, googleLogin } = useAuth();
-  const navigate = useNavigate();
   const alert = useAlert();
   const [error, setError] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location?.state || "/";
+
   const {
     register,
     handleSubmit,
@@ -30,7 +33,7 @@ const JoinUs = () => {
           alert("Login Successfully", "success");
         }
         //todo: private route redirect navigate
-        navigate("/");
+        navigate(from);
       })
       .catch((error) => {
         if (error.message.includes("invalid")) {
@@ -46,7 +49,7 @@ const JoinUs = () => {
       .then((result) => {
         if (result.user) {
           alert("Login Successfully", "success");
-          navigate("/");
+          navigate(from);
         }
       })
       .catch((error) => {

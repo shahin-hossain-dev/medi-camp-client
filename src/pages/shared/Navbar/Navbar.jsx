@@ -10,8 +10,6 @@ import useAlert from "../../../hooks/useAlert";
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const alert = useAlert();
-  console.log(alert);
-  console.log(alert);
   const navigate = useNavigate();
   const handleLogout = () => {
     logOut().then(() => {
