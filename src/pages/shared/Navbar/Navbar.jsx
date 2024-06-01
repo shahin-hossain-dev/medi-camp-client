@@ -65,7 +65,7 @@ const Navbar = () => {
       <div className="navbar-end">
         {!user && (
           <Link to={"/join-us"}>
-            <button className=" text-[#000000] rounded-sm duration-150 active:scale-95  font-medium me-3 bg-[#efb312] p-3 py-2">
+            <button className=" text-[#000000] rounded-sm px-5 duration-150 active:scale-95  font-medium me-3 bg-[#efb312] p-3 py-2">
               Join Us
             </button>
           </Link>
