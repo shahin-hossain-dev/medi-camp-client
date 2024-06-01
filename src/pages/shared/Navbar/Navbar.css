@@ -7,3 +7,8 @@
 .menu li > *:not(ul):not(.menu-title):not(details):hover{
     @apply rounded-sm
   }
+
+.file-input::file-selector-button{
+background: linear-gradient(to right bottom, #0066b2, #003d6b);
+border: 0;
+}

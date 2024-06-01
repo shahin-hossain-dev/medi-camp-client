@@ -4,6 +4,9 @@ import Home from "../pages/Home/Home/Home";
 import AvailableCamps from "../pages/AvailableCamps/AvailableCamps";
 import JoinUs from "../pages/JoinUs/JoinUs";
 import Register from "../pages/Register/Register";
+import Dashboard from "../layouts/Dashboard";
+import OrganizerProfile from "../pages/Dashboard/OrganizerProfile/OrganizerProfile";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,20 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "organizer-profile",
+        element: <OrganizerProfile />,
       },
     ],
   },

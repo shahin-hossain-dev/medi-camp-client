@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import googleLogo from "../../assets/icons/google.png";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
-import Swal from "sweetalert2";
+
 import useAlert from "../../hooks/useAlert";
 
 const JoinUs = () => {
@@ -16,7 +16,7 @@ const JoinUs = () => {
     handleSubmit,
     // watch,
     formState: { errors },
-    reset,
+    // reset,
   } = useForm();
   // console.log(errors);
   const onSubmit = (data) => {
@@ -38,6 +38,19 @@ const JoinUs = () => {
         } else {
           setError(error.message);
         }
+      });
+  };
+  // handle Google login
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        if (result.user) {
+          alert("Login Successfully", "success");
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
       });
   };
 
@@ -128,6 +141,7 @@ const JoinUs = () => {
             <div className="divider mt-3">OR</div>
             <div className="form-control mt-3">
               <button
+                onClick={handleGoogleLogin}
                 type="submit "
                 className="btn text-[#000] font-medium  rounded-sm"
               >

@@ -9,6 +9,7 @@ const useAlert = () => {
       timer: 1500,
       background: "linear-gradient(to left top, #0066b2, #003d6b)",
       color: "White",
+      width: "25em",
     });
   };
   return alert;

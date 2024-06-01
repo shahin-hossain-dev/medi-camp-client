@@ -2,17 +2,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import useAlert from "../../hooks/useAlert";
+import { useState } from "react";
 
 const Register = () => {
   const { userCreate, updateUserProfile, logOut } = useAuth();
+  const [firebaseError, setFirebaseError] = useState("");
   const navigate = useNavigate();
+  const alert = useAlert();
   const {
     register,
     handleSubmit,
     // watch,
     formState: { errors },
     setError,
-    reset,
+    // reset,
   } = useForm();
   // console.log(errors);
   const onSubmit = async (data) => {
@@ -48,13 +52,17 @@ const Register = () => {
             updateUserProfile(name, userImage).then(() => {
               logOut();
               navigate("/join-us");
-
+              alert("Account Created Successfully", "success");
               //todo: user post to database
             });
           }
         })
         .catch((error) => {
-          console.log(error.message);
+          if (error.message.includes("email-already")) {
+            alert("This email already been used", "error");
+          } else {
+            setFirebaseError(error.message);
+          }
         });
     }
   };
@@ -114,9 +122,9 @@ const Register = () => {
                   type="file"
                   {...register("photo", { required: true })}
                   placeholder="Upload your photo"
-                  className="file-input  file-input-bordered rounded-sm"
+                  className="file-input file-input-bordered rounded-sm"
                 />
-                {errors.PhotoURL && (
+                {errors.photo && (
                   <span className="text-red-500 mt-1 text-start">
                     Please choose a photo
                   </span>
@@ -202,6 +210,11 @@ const Register = () => {
                 </Link>
               </small>
             </p>
+            <div className="mb-6 mx-8 mt-4">
+              <p className="text-red-600 font-semibold text-center">
+                {firebaseError}
+              </p>
+            </div>
           </div>
         </div>
       </div>
