@@ -7,6 +7,7 @@ import Register from "../pages/Register/Register";
 import Dashboard from "../layouts/Dashboard";
 import OrganizerProfile from "../pages/Dashboard/OrganizerProfile/OrganizerProfile";
 import PrivateRoute from "./PrivateRoute";
+import CampDetails from "../pages/CampDetails/CampDetails";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/camp-details/:id",
+        element: <CampDetails />,
       },
     ],
   },
