@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <div className="roboto-font ">
+        <div className="roboto-font max-w-screen-2xl mx-auto">
           <RouterProvider router={router}></RouterProvider>
         </div>
       </AuthProvider>

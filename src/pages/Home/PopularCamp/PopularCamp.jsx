@@ -3,6 +3,7 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import PopularCampCard from "./PopularCampCard";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
+import { Link } from "react-router-dom";
 
 const PopularCamp = () => {
   // http://localhost:5000/popular-camps?sort=dsc
@@ -21,12 +22,19 @@ const PopularCamp = () => {
     return <LoadingSpinner />;
   }
   return (
-    <div className=" w-[95%] mx-auto">
+    <div className=" w-[90%] mx-auto">
       <SectionTitle />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 gap-y-6 mt-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 gap-y-6 mt-12">
         {camps.map((camp) => (
           <PopularCampCard key={camp._id} camp={camp} />
         ))}
+      </div>
+      <div className="mt-12 flex justify-center">
+        <Link to={"/available-camps"}>
+          <button className="btn text-[#ffffff] text-xl px-10 bg-gradient-to-br from-[#0066b2] to-[#003d6b] rounded-sm">
+            See All Camps
+          </button>
+        </Link>
       </div>
     </div>
   );

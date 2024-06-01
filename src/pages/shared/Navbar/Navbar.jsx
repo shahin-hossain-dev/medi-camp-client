@@ -28,7 +28,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar md:px-5 py-5 bg-gradient-to-br from-[#0066b2] to-[#003d6b]">
+    <div className="navbar md:px-5 py-5 lg:py-8 bg-gradient-to-br from-[#0066b2] to-[#003d6b]">
       <div className="navbar-start">
         <div className="dropdown ">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

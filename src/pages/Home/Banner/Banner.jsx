@@ -44,11 +44,11 @@ const Banner = () => {
                   <span>{slide.date}</span>
                 </span>
               </div>
-              <div className="flex-1 h-full">
+              <div className="flex-1  h-full">
                 <img
                   src={slide.image_url}
                   alt=""
-                  className="w-full h-[300px] mt-0 object-cover lg:w-[700px] lg:h-[500px] "
+                  className="w-full ms-auto h-[300px] mt-0 object-cover lg:w-[700px] lg:h-[500px] "
                 />
               </div>
             </div>
