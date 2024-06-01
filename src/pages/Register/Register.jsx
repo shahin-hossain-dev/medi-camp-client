@@ -7,13 +7,17 @@ const Register = () => {
     handleSubmit,
     // watch,
     formState: { errors },
+    setError,
     reset,
   } = useForm();
   // console.log(errors);
   const onSubmit = (data) => {
     // console.log(data);
-    const { name, PhotoURL, email, password } = data;
-    // console.log(name, email, PhotoURL, password);
+    const { name, photo, email, password, role } = data;
+    if (role === "Select One") {
+      return setError("role");
+    }
+    console.log(name, email, photo[0], password, role);
   };
 
   return (
@@ -42,20 +46,44 @@ const Register = () => {
               </div>
               <div className="form-control">
                 <label className="label">
+                  <span className="label-text">Select Your role</span>
+                </label>
+                <select
+                  className="select select-bordered w-full rounded-sm "
+                  defaultValue={"Select One"}
+                  {...register("role", { required: true })}
+                >
+                  <option disabled>Select One</option>
+                  <option value="participant">Participants</option>
+                  <option value="organizer">Organizer</option>
+                  <option value={"healthcare professional"}>
+                    Healthcare Professional
+                  </option>
+                </select>
+                {errors.role && (
+                  <span className="text-red-500 mt-1 text-start">
+                    Please select your role
+                  </span>
+                )}
+                {/* {errors.role === "select" && errors.role.message} */}
+              </div>
+              <div className="form-control">
+                <label className="label">
                   <span className="label-text">Photo</span>
                 </label>
                 <input
                   type="file"
-                  {...register("PhotoURL", { required: true })}
-                  placeholder="Enter Your PhotoURL"
+                  {...register("photo", { required: true })}
+                  placeholder="Upload your photo"
                   className="file-input  file-input-bordered rounded-sm"
                 />
                 {errors.PhotoURL && (
                   <span className="text-red-500 mt-1 text-start">
-                    Please fill up PhotoURL field
+                    Please choose a photo
                   </span>
                 )}
               </div>
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -81,9 +109,9 @@ const Register = () => {
                   type="password"
                   {...register("password", {
                     required: true,
-                    minLength: 6,
-                    maxLength: 16,
-                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                    // minLength: 6,
+                    // maxLength: 16,
+                    // pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
                   })}
                   name="password"
                   placeholder="password"
