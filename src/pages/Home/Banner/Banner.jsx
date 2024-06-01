@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 const Banner = () => {
-  console.log(bannerData);
+  // console.log(bannerData);
   return (
     <div>
       <Swiper
