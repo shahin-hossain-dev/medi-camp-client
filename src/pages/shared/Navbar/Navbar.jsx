@@ -5,12 +5,17 @@ import useAuth from "../../../hooks/useAuth";
 import { FaRegUser } from "react-icons/fa6";
 import { TbCategory } from "react-icons/tb";
 import { MdLogout } from "react-icons/md";
+
+import useAlert from "../../../hooks/useAlert";
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const alert = useAlert();
+  console.log(alert);
+  console.log(alert);
   const navigate = useNavigate();
   const handleLogout = () => {
     logOut().then(() => {
-      console.log("Logout Success full");
+      alert("Logout Successfully", "success");
       navigate("/");
     });
   };

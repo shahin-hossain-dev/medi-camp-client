@@ -1,0 +1,17 @@
+import Swal from "sweetalert2";
+
+const useAlert = () => {
+  const alert = (title, iconType) => {
+    Swal.fire({
+      title: title,
+      icon: iconType,
+      showConfirmButton: false,
+      timer: 1500,
+      background: "linear-gradient(to left top, #0066b2, #003d6b)",
+      color: "White",
+    });
+  };
+  return alert;
+};
+
+export default useAlert;

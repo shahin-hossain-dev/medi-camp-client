@@ -2,9 +2,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import googleLogo from "../../assets/icons/google.png";
 import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import useAlert from "../../hooks/useAlert";
+
 const JoinUs = () => {
-  const { userLogin } = useAuth();
+  const { userLogin, googleLogin } = useAuth();
   const navigate = useNavigate();
+  const alert = useAlert();
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -20,14 +26,19 @@ const JoinUs = () => {
     userLogin(email, password)
       .then((result) => {
         console.log(result);
+        if (result.user) {
+          alert("Login Successfully", "success");
+        }
         //todo: private route redirect navigate
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        if (error.message.includes("invalid")) {
+          alert("Invalid Email or Password", "error");
+        } else {
+          setError(error.message);
+        }
       });
-
-    console.log(email, password);
   };
 
   return (
@@ -123,6 +134,9 @@ const JoinUs = () => {
                 <img src={googleLogo} alt="" className="w-[30px]" />
                 <span>Join us with Google</span>
               </button>
+            </div>
+            <div className="mb-6 mx-8 mt-4">
+              <p className="text-red-600 font-semibold text-center">{error}</p>
             </div>
           </div>
         </div>
