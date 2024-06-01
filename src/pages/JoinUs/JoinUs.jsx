@@ -1,7 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import googleLogo from "../../assets/icons/google.png";
+import useAuth from "../../hooks/useAuth";
 const JoinUs = () => {
+  const { userLogin } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -13,6 +16,16 @@ const JoinUs = () => {
   const onSubmit = (data) => {
     // console.log(data);
     const { email, password } = data;
+
+    userLogin(email, password)
+      .then((result) => {
+        console.log(result);
+        //todo: private route redirect navigate
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     console.log(email, password);
   };

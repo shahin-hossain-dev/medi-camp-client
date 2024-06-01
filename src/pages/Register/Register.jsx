@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 const Register = () => {
-  const { userCreate } = useAuth();
-
+  const { userCreate, updateUserProfile, logOut } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,19 +15,48 @@ const Register = () => {
     reset,
   } = useForm();
   // console.log(errors);
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // console.log(data);
     const { name, photo, email, password, role } = data;
     if (role === "Select One") {
       return setError("role");
     }
-    userCreate(email, password)
-      .then((result) => {
-        console.log(result.user);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    // img bb image hosting api
+    // 3 part: api - img file - headers
+    const imgFile = { image: photo[0] };
+
+    const res = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${
+        import.meta.env.VITE_IMAGE_HOSTING_KEY
+      }`,
+      imgFile,
+      {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      }
+    );
+
+    const userImage = res.data.data.url;
+    console.log(res.data);
+
+    if (res.data.success) {
+      userCreate(email, password)
+        .then((result) => {
+          console.log(result.user);
+          if (result.user) {
+            updateUserProfile(name, userImage).then(() => {
+              logOut();
+              navigate("/join-us");
+
+              //todo: user post to database
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
   };
 
   return (
@@ -159,7 +189,7 @@ const Register = () => {
               <div className="form-control mt-6">
                 <input
                   type="submit"
-                  value="Join Us"
+                  value="Register"
                   className="btn text-[#ffffff] bg-gradient-to-br from-[#0066b2] to-[#003d6b] rounded-sm"
                 />
               </div>
