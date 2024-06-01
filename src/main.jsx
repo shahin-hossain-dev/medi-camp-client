@@ -3,11 +3,14 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes/Route.jsx";
+import AuthProvider from "./providers/AuthProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div className="roboto-font ">
-      <RouterProvider router={router}></RouterProvider>
-    </div>
+    <AuthProvider>
+      <div className="roboto-font ">
+        <RouterProvider router={router}></RouterProvider>
+      </div>
+    </AuthProvider>
   </React.StrictMode>
 );

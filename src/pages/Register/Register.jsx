@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
 
 const Register = () => {
+  const { userCreate } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -17,7 +20,13 @@ const Register = () => {
     if (role === "Select One") {
       return setError("role");
     }
-    console.log(name, email, photo[0], password, role);
+    userCreate(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   return (
