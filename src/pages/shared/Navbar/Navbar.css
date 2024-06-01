@@ -1,3 +1,9 @@
 .nav-non-select{
     position: relative;
 }
+.menu li > *:not(ul):not(.menu-title):not(details):active{
+    @apply bg-gradient-to-br from-[#0066b2] to-[#003d6b] rounded-sm
+  }
+.menu li > *:not(ul):not(.menu-title):not(details):hover{
+    @apply rounded-sm
+  }

@@ -1,7 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ActiveLink from "../../../components/ActiveLink/ActiveLink";
 import "./Navbar.css";
+import useAuth from "../../../hooks/useAuth";
+import { FaRegUser } from "react-icons/fa6";
+import { TbCategory } from "react-icons/tb";
+import { MdLogout } from "react-icons/md";
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logOut().then(() => {
+      console.log("Logout Success full");
+      navigate("/");
+    });
+  };
   const navLinks = (
     <>
       <li>
@@ -48,44 +60,54 @@ const Navbar = () => {
         <ul className="flex gap-5 text-[#ffffff]">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-        <Link to={"/join-us"}>
-          <button className=" text-[#000000] rounded-sm duration-150 active:scale-95  font-medium me-3 bg-[#efb312] p-3 py-2">
-            Join Us
-          </button>
-        </Link>
+        {!user && (
+          <Link to={"/join-us"}>
+            <button className=" text-[#000000] rounded-sm duration-150 active:scale-95  font-medium me-3 bg-[#efb312] p-3 py-2">
+              Join Us
+            </button>
+          </Link>
+        )}
 
         {/* user */}
-        <div className="dropdown dropdown-end ">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar  text-[#ffffff"
-          >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component]"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-              />
+        {user && (
+          <div className="dropdown dropdown-end ">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar  text-[#ffffff"
+            >
+              <div className="w-10 rounded-full">
+                <img alt="User Image" src={user?.photoURL} />
+              </div>
             </div>
+            <ul
+              tabIndex={0}
+              className="menu rounded-md menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100  w-52 "
+            >
+              <li>
+                <h3 className="justify-between">
+                  <span className="flex gap-2">
+                    <FaRegUser />
+                    <span>{user?.displayName}</span>
+                  </span>
+                  {/* <span className="badge">New</span> */}
+                </h3>
+              </li>
+              <li>
+                <span>
+                  <TbCategory />
+                  <Link to={"/dashboard"}>Dashboard</Link>
+                </span>
+              </li>
+              <li>
+                <span className="flex gap-2">
+                  <MdLogout />
+                  <button onClick={handleLogout}>Logout</button>
+                </span>
+              </li>
+            </ul>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu rounded-md menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100  w-52"
-          >
-            <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Dashboard</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
-        </div>
+        )}
       </div>
     </div>
   );
