@@ -14,6 +14,12 @@ const JoinUs = () => {
   const navigate = useNavigate();
   const from = location?.state || "/";
 
+  const { user } = useAuth();
+
+  if (user) {
+    navigate(from);
+  }
+
   const {
     register,
     handleSubmit,

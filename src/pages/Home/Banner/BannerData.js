@@ -14,10 +14,10 @@ export const bannerData = [
   },
   {
     id: 2,
-    title: "Eye Care Camp in Sylhet",
+    title: "Eye Care Camp in Patuakhali",
     image_url: camp2,
     description:
-      "In March 2023, a specialized eye care camp in Sylhet provided free eye examinations, cataract surgeries, and distributed over 300 pairs of glasses to underprivileged individuals. The initiative restored sight to 150 patients.",
+      "In March 2023, a specialized eye care camp in Patuakhali provided free eye examinations, cataract surgeries, and distributed over 300 pairs of glasses to underprivileged individuals. The initiative restored sight to 150 patients.",
     date: "2023-03-22",
   },
   {
