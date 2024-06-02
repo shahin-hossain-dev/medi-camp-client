@@ -9,8 +9,10 @@ import { LuBadgeDollarSign } from "react-icons/lu";
 import { FaUserDoctor } from "react-icons/fa6";
 import { SiTicktick } from "react-icons/si";
 import ParticipantRegiModal from "../../components/Modals/ParticipantRegiModal";
+import useAuth from "../../hooks/useAuth";
 
 const CampDetails = () => {
+  const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
   const { id } = useParams();
   // console.log(id);
@@ -18,7 +20,7 @@ const CampDetails = () => {
     queryKey: ["singleCamp"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/camps/${id}`);
-      console.log(res.data.data);
+      // console.log(res.data.data);
       return res.data;
     },
   });
@@ -56,7 +58,10 @@ const CampDetails = () => {
         </div>
         <button
           onClick={() => document.getElementById("my_modal_5").showModal()}
-          className="btn text-[#ffffff] bg-gradient-to-br from-[#0066b2] to-[#003d6b] rounded-sm"
+          className={`btn text-[#ffffff]  rounded-sm ${
+            user ? "bg-gradient-to-br from-[#0066b2] to-[#003d6b]" : ""
+          }`}
+          disabled={!user}
         >
           Join Camp
         </button>
