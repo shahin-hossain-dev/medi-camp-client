@@ -8,6 +8,7 @@ import moment from "moment";
 import { LuBadgeDollarSign } from "react-icons/lu";
 import { FaUserDoctor } from "react-icons/fa6";
 import { SiTicktick } from "react-icons/si";
+import ParticipantRegiModal from "../../components/Modals/ParticipantRegiModal";
 
 const CampDetails = () => {
   const axiosPublic = useAxiosPublic();
@@ -53,7 +54,10 @@ const CampDetails = () => {
             {date}
           </span>
         </div>
-        <button className="btn text-[#ffffff] bg-gradient-to-br from-[#0066b2] to-[#003d6b] rounded-sm">
+        <button
+          onClick={() => document.getElementById("my_modal_5").showModal()}
+          className="btn text-[#ffffff] bg-gradient-to-br from-[#0066b2] to-[#003d6b] rounded-sm"
+        >
           Join Camp
         </button>
       </div>
@@ -129,6 +133,7 @@ const CampDetails = () => {
         </p>
         <p>{description}</p>
       </div>
+      <ParticipantRegiModal camp={camp} />
     </div>
   );
 };
