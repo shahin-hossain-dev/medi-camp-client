@@ -10,13 +10,18 @@ const AvailableCamps = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const [allCamps, setAllCamps] = useState();
+  const [allCamps, setAllCamps] = useState([]);
+
   const axiosPublic = useAxiosPublic();
 
-  const { data: camps, isLoading } = useQuery({
+  const {
+    data: camps,
+    // refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["availableCamp"],
     queryFn: async () => {
-      const res = await axiosPublic("/camps");
+      const res = await axiosPublic(`/camps`);
       setAllCamps(res.data);
       return res.data;
     },
@@ -35,6 +40,17 @@ const AvailableCamps = () => {
           .includes(searchText.toLowerCase())
     );
     setAllCamps(campSearch);
+  };
+
+  // sort options
+
+  const handleSort = async (e) => {
+    console.log(e.target.value);
+    const text = e.target.value;
+
+    const res = await axiosPublic(`/campsAll?sort=${text}`);
+
+    setAllCamps(res.data);
   };
 
   if (isLoading) {
@@ -70,20 +86,23 @@ const AvailableCamps = () => {
           <label className="label flex justify-center md:justify-start mb-1 ">
             <span className="text-xl font-medium">Sort Option</span>
           </label>
-          <select className="select focus:border-[#0066b2] focus:outline-0 focus:outline-offset-0 rounded-sm w-full border-[#0066b2]">
+          <select
+            onChange={handleSort}
+            className="select focus:border-[#0066b2] focus:outline-0 focus:outline-offset-0 rounded-sm w-full border-[#0066b2]"
+          >
             <option defaultValue={"selected"} value={"Filter Job"}>
               Sort Camps
             </option>
-            <option value={"On Site"}>Most Registered</option>
-            <option value={"Remote"}>Camp Fees</option>
-            <option value={"Hybrid"}>A-Z Order</option>
+            <option value={"Most Registered"}>Most Registered</option>
+            <option value={"Camp Fees"}>Camp Fees</option>
+            <option value={"A-Z Order"}>A-Z Order</option>
           </select>
         </div>
       </div>
 
       {/* camps card */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 gap-y-6 mt-12">
-        {allCamps?.map((camp) => (
+        {allCamps.map((camp) => (
           <AvailableCampCard key={camp._id} camp={camp} />
         ))}
       </div>

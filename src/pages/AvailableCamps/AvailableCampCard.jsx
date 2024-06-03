@@ -20,6 +20,7 @@ const AvailableCampCard = ({ camp }) => {
     location,
     image,
     description,
+    fees,
   } = camp;
 
   const date = moment(dateAndTime).format("DD-MM-YYYY, hh:mm a");
@@ -34,10 +35,16 @@ const AvailableCampCard = ({ camp }) => {
         />
       </figure>
       <div className="card-body">
-        <span className="flex gap-1 items-center">
-          <IoLocationOutline className="text-base text-[#0066b2]" />
-          <span className="text-base  text-[#0066b2]">{location}</span>
-        </span>
+        <div className="flex justify-between">
+          <span className="flex gap-1 items-center">
+            <IoLocationOutline className="text-base text-[#0066b2]" />
+            <span className="text-base  text-[#0066b2]">{location}</span>
+          </span>
+          <div className="flex gap-1 items-center" title="Participant Fee">
+            <LuBadgeDollarSign className="text-base text-[#0066b2]" />
+            <p className="text-base  text-[#0066b2]">{fees}</p>
+          </div>
+        </div>
         <h2 className="card-title text-[#003d6b]">{campName}</h2>
 
         <div className="flex justify-between">
