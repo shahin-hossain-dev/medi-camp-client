@@ -2,11 +2,13 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAlert from "../../hooks/useAlert";
 
-const ParticipantRegiModal = ({ camp }) => {
+const ParticipantRegiModal = ({ camp, refetch }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { campName, healthcareProfessional, location, fees } = camp;
+  const alert = useAlert();
+  const { _id, campName, healthcareProfessional, location, fees } = camp;
 
   const {
     register,
@@ -23,7 +25,15 @@ const ParticipantRegiModal = ({ camp }) => {
         "/registered-participant",
         registerData
       );
+      return res.data;
+    },
+    onSuccess: (res) => {
       console.log(res);
+      document.getElementById("participant-register-modal").close();
+      if (res.insertedId) {
+        refetch();
+        alert("Participant Request Sent", "success");
+      }
     },
   });
 
@@ -36,6 +46,7 @@ const ParticipantRegiModal = ({ camp }) => {
       participantName: user?.displayName,
       participantEmail: user?.email,
       ...data,
+      campId: _id,
     };
     // console.log(registerData);
 
@@ -44,13 +55,16 @@ const ParticipantRegiModal = ({ camp }) => {
   return (
     <div>
       {/* Apply Modal */}
-      <dialog id="my_modal_5" className="modal ">
+      <dialog id="participant-register-modal" className="modal ">
         <div
           className="modal-box w-11/12 max-w-5xl"
           style={{ borderRadius: "10px" }}
         >
           {/* working  */}
           <div className=" shrink-0 w-full ">
+            <h2 className="text-2xl md:text-3xl text-center font-medium">
+              Participant Registration
+            </h2>
             <form
               onSubmit={handleSubmit(handleParticipantRegister)}
               className="card-body"

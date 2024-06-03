@@ -16,7 +16,11 @@ const CampDetails = () => {
   const axiosPublic = useAxiosPublic();
   const { id } = useParams();
   // console.log(id);
-  const { data: camp, isLoading } = useQuery({
+  const {
+    data: camp,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["singleCamp"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/camps/${id}`);
@@ -57,7 +61,9 @@ const CampDetails = () => {
           </span>
         </div>
         <button
-          onClick={() => document.getElementById("my_modal_5").showModal()}
+          onClick={() =>
+            document.getElementById("participant-register-modal").showModal()
+          }
           className={`btn text-[#ffffff]  rounded-sm ${
             user ? "bg-gradient-to-br from-[#0066b2] to-[#003d6b]" : ""
           }`}
@@ -138,7 +144,7 @@ const CampDetails = () => {
         </p>
         <p>{description}</p>
       </div>
-      <ParticipantRegiModal camp={camp} />
+      <ParticipantRegiModal camp={camp} refetch={refetch} />
     </div>
   );
 };
