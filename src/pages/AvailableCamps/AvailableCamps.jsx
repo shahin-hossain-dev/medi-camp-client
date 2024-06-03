@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { Link } from "react-router-dom";
 import AvailableCampCard from "./AvailableCampCard";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { useEffect, useState } from "react";
@@ -43,27 +42,46 @@ const AvailableCamps = () => {
   }
   return (
     <div className=" w-[90%] mx-auto">
-      <form onSubmit={handleSearch}>
-        <fieldset className="form-control w-full">
-          <label className="label flex justify-center md:justify-start mb-2 ">
-            <span className="text-xl font-semibold">Search Camps Keyword</span>
+      {/* Search input */}
+      <div className="flex gap-5">
+        <form onSubmit={handleSearch} className="flex-1">
+          <fieldset className="form-control w-full">
+            <label className="label flex justify-center md:justify-start mb-1 ">
+              <span className="text-xl font-medium">Search Camps Keyword</span>
+            </label>
+            <div className="join">
+              <input
+                type="text"
+                name="search"
+                placeholder="search your job"
+                className=" outline-none px-3 w-full join-item rounded-sm border border-[#0066b2]"
+              />
+              <button
+                type="submit"
+                className="btn rounded-sm join-item border-[#0066b2] hover:border-[#0066b2]"
+              >
+                Search
+              </button>
+            </div>
+          </fieldset>
+        </form>
+        {/* Sort dropdown */}
+        <div className=" flex-1 ">
+          <label className="label flex justify-center md:justify-start mb-1 ">
+            <span className="text-xl font-medium">Sort Option</span>
           </label>
-          <div className="join">
-            <input
-              type="text"
-              name="search"
-              placeholder="search your job"
-              className=" outline-none px-3 w-full md:w-1/2 join-item rounded-md border border-[#0066b2]"
-            />
-            <button
-              type="submit"
-              className="btn  join-item border-[#0066b2] hover:border-[#0066b2]"
-            >
-              Search
-            </button>
-          </div>
-        </fieldset>
-      </form>
+          <select className="select focus:border-[#0066b2] focus:outline-0 focus:outline-offset-0 rounded-sm w-full border-[#0066b2]">
+            <option defaultValue={"selected"} value={"Filter Job"}>
+              Sort Camps
+            </option>
+            <option value={"On Site"}>Most Registered</option>
+            <option value={"Remote"}>Camp Fees</option>
+            <option value={"Hybrid"}>A-Z Order</option>
+          </select>
+        </div>
+      </div>
+
+      {/* camps card */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 gap-y-6 mt-12">
         {allCamps?.map((camp) => (
           <AvailableCampCard key={camp._id} camp={camp} />
