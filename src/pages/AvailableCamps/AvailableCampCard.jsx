@@ -9,7 +9,7 @@ const styles = {
   clipPath: "polygon(0% 0%, 100% 0, 99% 100%, 77% 93%, 0% 100%)",
 };
 
-const PopularCampCard = ({ camp }) => {
+const AvailableCampCard = ({ camp }) => {
   const {
     _id,
     campName,
@@ -19,12 +19,12 @@ const PopularCampCard = ({ camp }) => {
     healthcareProfessional,
     location,
     image,
-    fees,
+    description,
   } = camp;
 
-  const date = moment(dateAndTime).format("DD/MM/YYYY, hh:mm a");
+  const date = moment(dateAndTime).format("DD-MM-YYYY, hh:mm a");
   return (
-    <div className="card card-compact rounded-none shadow-xl">
+    <div className="card card-compact rounded-sm shadow-xl">
       <figure>
         <img
           style={styles}
@@ -40,24 +40,32 @@ const PopularCampCard = ({ camp }) => {
         </span>
         <h2 className="card-title text-[#003d6b]">{campName}</h2>
 
-        <div className="flex gap-1 items-center">
-          <LuBadgeDollarSign className="text-base text-[#0066b2]" />
-          <p className="text-base  text-[#0066b2]">{fees}</p>
+        <div className="flex justify-between">
+          <span
+            className="flex gap-1 items-center text-base "
+            title="Registered Participants"
+          >
+            <FaUsers />
+            {participantCount}
+          </span>
+          <span className="flex gap-1 items-center text-base ">
+            <FaUserDoctor />
+            {healthcareProfessional}
+          </span>
         </div>
 
-        <span className="flex gap-1 items-center text-[#0066b2]">
-          <FaUsers />
-          {participantCount}
-        </span>
-        <span className="flex gap-1 items-center text-base text-[#0066b2] ">
+        <div className="mt-2">
+          <p className="text-base text-justify">
+            {description.length > 200
+              ? description.slice(0, 200) + "..."
+              : description}
+          </p>
+        </div>
+        <span className="flex gap-1 mt-2 items-center text-base  ">
           <FaRegCalendarAlt />
           {date}
         </span>
-        <span className="flex gap-1 items-center text-base text-[#0066b2] ">
-          <FaUserDoctor />
-          {healthcareProfessional}
-        </span>
-
+        <div className="divider"></div>
         <div className="card-actions justify-end mt-auto">
           <Link to={`/camp-details/${_id}`}>
             <button className="btn text-[#ffffff] bg-gradient-to-br from-[#0066b2] to-[#003d6b] rounded-sm">
@@ -70,4 +78,4 @@ const PopularCampCard = ({ camp }) => {
   );
 };
 
-export default PopularCampCard;
+export default AvailableCampCard;

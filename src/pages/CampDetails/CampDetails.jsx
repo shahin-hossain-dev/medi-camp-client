@@ -10,12 +10,17 @@ import { FaUserDoctor } from "react-icons/fa6";
 import { SiTicktick } from "react-icons/si";
 import ParticipantRegiModal from "../../components/Modals/ParticipantRegiModal";
 import useAuth from "../../hooks/useAuth";
+import { useEffect } from "react";
 
 const CampDetails = () => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
   const { id } = useParams();
-  // console.log(id);
+  // enter page to view from top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const {
     data: camp,
     isLoading,
