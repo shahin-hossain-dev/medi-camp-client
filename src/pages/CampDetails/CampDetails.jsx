@@ -137,7 +137,7 @@ const CampDetails = () => {
             {medicalServices.map((service, idx) => (
               <p key={idx} className="flex items-center gap-3 space-y-2">
                 <SiTicktick className="text-[#efb312]" />
-                <span>{service}</span>
+                <span className="text-gray-500">{service}</span>
               </p>
             ))}
           </div>

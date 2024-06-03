@@ -11,6 +11,7 @@ const AvailableCamps = () => {
     window.scrollTo(0, 0);
   }, []);
   const [allCamps, setAllCamps] = useState([]);
+  const [layout, setLayout] = useState(false);
 
   const axiosPublic = useAxiosPublic();
 
@@ -42,8 +43,13 @@ const AvailableCamps = () => {
     setAllCamps(campSearch);
   };
 
-  // sort options
+  // card Layout
 
+  const layoutHandle = () => {
+    setLayout(!layout);
+  };
+
+  // sort options
   const handleSort = async (e) => {
     console.log(e.target.value);
     const text = e.target.value;
@@ -81,6 +87,15 @@ const AvailableCamps = () => {
             </div>
           </fieldset>
         </form>
+        {/* layout changer  */}
+        <div className="mt-auto hidden lg:block">
+          <button
+            onClick={layoutHandle}
+            className="btn text-[#ffffff] bg-gradient-to-br from-[#0066b2] to-[#003d6b] rounded-sm"
+          >
+            Change Layout
+          </button>
+        </div>
         {/* Sort dropdown */}
         <div className=" flex-1 ">
           <label className="label flex justify-center md:justify-start mb-1 ">
@@ -101,7 +116,11 @@ const AvailableCamps = () => {
       </div>
 
       {/* camps card */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 gap-y-6 mt-12">
+      <div
+        className={`grid grid-cols-1 md:grid-cols-2 lg:${
+          layout ? "grid-cols-2" : "grid-cols-3"
+        } gap-6 gap-y-6 mt-12`}
+      >
         {allCamps.map((camp) => (
           <AvailableCampCard key={camp._id} camp={camp} />
         ))}
