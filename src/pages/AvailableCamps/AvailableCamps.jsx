@@ -65,7 +65,7 @@ const AvailableCamps = () => {
   return (
     <div className=" w-[90%] mx-auto">
       {/* Search input */}
-      <div className="flex gap-5">
+      <div className="flex flex-col lg:flex-row gap-5">
         <form onSubmit={handleSearch} className="flex-1">
           <fieldset className="form-control w-full">
             <label className="label flex justify-center md:justify-start mb-1 ">
@@ -103,11 +103,10 @@ const AvailableCamps = () => {
           </label>
           <select
             onChange={handleSort}
+            defaultValue={"Sort Camps"}
             className="select focus:border-[#0066b2] focus:outline-0 focus:outline-offset-0 rounded-sm w-full border-[#0066b2]"
           >
-            <option defaultValue={"selected"} value={"Filter Job"}>
-              Sort Camps
-            </option>
+            <option disabled>Sort Camps</option>
             <option value={"Most Registered"}>Most Registered</option>
             <option value={"Camp Fees"}>Camp Fees</option>
             <option value={"A-Z Order"}>A-Z Order</option>
