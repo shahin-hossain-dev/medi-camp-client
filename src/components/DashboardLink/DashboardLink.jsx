@@ -1,0 +1,21 @@
+import { NavLink } from "react-router-dom";
+
+const DashboardLink = ({ to, children }) => {
+  return (
+    <NavLink to={to}>
+      {({ isActive }) => (
+        <span
+          className={` flex p-2 rounded-lg gap-2 items-center  ${
+            isActive
+              ? "text-[white] text-base bg-[#374151] "
+              : "hover:bg-[#374151] duration-200  text-[#D1D5DB]"
+          }`}
+        >
+          {children}
+        </span>
+      )}
+    </NavLink>
+  );
+};
+
+export default DashboardLink;

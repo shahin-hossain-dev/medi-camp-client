@@ -8,6 +8,9 @@ import Dashboard from "../layouts/Dashboard";
 import OrganizerProfile from "../pages/Dashboard/OrganizerProfile/OrganizerProfile";
 import PrivateRoute from "./PrivateRoute";
 import CampDetails from "../pages/CampDetails/CampDetails";
+import AddCamp from "../pages/Dashboard/AddCamp/AddCamp";
+import ManageCamp from "../pages/Dashboard/ManageCamp/ManageCamp";
+import ManageRegisteredCamp from "../pages/Dashboard/ManageRegisteredCamp/ManageRegisteredCamp";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +40,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/dashboard",
+    path: "dashboard",
     element: (
       <PrivateRoute>
         <Dashboard />
@@ -47,6 +50,18 @@ const router = createBrowserRouter([
       {
         path: "organizer-profile",
         element: <OrganizerProfile />,
+      },
+      {
+        path: "add-camp",
+        element: <AddCamp />,
+      },
+      {
+        path: "manage-camp",
+        element: <ManageCamp />,
+      },
+      {
+        path: "registered-camp",
+        element: <ManageRegisteredCamp />,
       },
     ],
   },
