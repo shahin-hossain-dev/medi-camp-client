@@ -13,7 +13,7 @@ const Dashboard = () => {
           <button className="text-sm btn btn-sm">View Site</button>
         </Link>
       </h2> */}
-      <div className="grid md:grid-cols-10 md:gap-5">
+      <div className="grid md:grid-cols-10">
         {/* dashboard nav bar */}
         <div className="hidden md:flex md:col-span-3 lg:col-span-2">
           <DashboardNav />
