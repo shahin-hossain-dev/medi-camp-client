@@ -7,7 +7,7 @@ import DashboardLink from "../DashboardLink/DashboardLink";
 
 const DashboardNav = () => {
   return (
-    <div className="bg-[#1F2937] pt-20 p-5 md:p-5 min-h-screen ">
+    <div className="bg-[#003d6b] pt-20 p-5 md:p-5 min-h-screen ">
       <div className="flex gap-2 items-center">
         <LuLayoutDashboard className="text-white text-lg" />
         <h2 className="text-base md:text-xl text-[#D1D5DB]">Dashboard</h2>

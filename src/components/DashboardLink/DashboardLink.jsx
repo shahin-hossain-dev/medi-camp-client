@@ -7,8 +7,8 @@ const DashboardLink = ({ to, children }) => {
         <span
           className={` flex p-2 rounded-lg gap-2 items-center  ${
             isActive
-              ? "text-[white] text-base bg-[#374151] "
-              : "hover:bg-[#374151] duration-200  text-[#D1D5DB]"
+              ? "text-[white] text-base bg-[#012f53] "
+              : "hover:bg-[#012f53] duration-200  text-[#D1D5DB]"
           }`}
         >
           {children}

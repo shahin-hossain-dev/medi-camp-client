@@ -15,7 +15,7 @@ const ParticipantRegiModal = ({ camp, refetch }) => {
     handleSubmit,
     // watch,
     formState: { errors },
-    setError,
+    // setError,
     // reset,
   } = useForm();
 

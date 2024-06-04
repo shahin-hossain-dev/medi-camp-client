@@ -1,5 +1,6 @@
 import moment from "moment";
 import useAuth from "../../../hooks/useAuth";
+import UpdateProfileModal from "../../../components/Modals/UpdateProfileModal";
 
 const OrganizerProfile = () => {
   const { user } = useAuth();
@@ -7,7 +8,7 @@ const OrganizerProfile = () => {
   const lastLogin = user?.metadata?.lastSignInTime;
   console.log(join);
   return (
-    <div className="p-24">
+    <div className="p-16">
       {/* <div className="w-full relative h-[100px] bg-gradient-to-br from-[#374151] to-[#111827]"></div> */}
       <div className="flex flex-col md:flex-row gap-6">
         <div
@@ -46,13 +47,19 @@ const OrganizerProfile = () => {
             </p>
 
             <div className="card-actions justify-end items-end">
-              <button className=" text-[#000000]  rounded-sm px-5 duration-150 active:scale-95  font-medium me-3 bg-[#efb312] p-3 py-2">
+              <button
+                onClick={() =>
+                  document.getElementById("update-profile-modal").showModal()
+                }
+                className=" text-[#000000]  rounded-sm px-5 duration-150 active:scale-95  font-medium me-3 bg-[#efb312] p-3 py-2"
+              >
                 Update
               </button>
             </div>
           </div>
         </div>
       </div>
+      <UpdateProfileModal />
     </div>
   );
 };
