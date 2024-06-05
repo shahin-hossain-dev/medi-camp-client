@@ -8,7 +8,7 @@ const OrganizerProfile = () => {
   const lastLogin = user?.metadata?.lastSignInTime;
   console.log(join);
   return (
-    <div className="p-16">
+    <div className="md:p-16 p-5 mt-10 md:mt-0">
       {/* <div className="w-full relative h-[100px] bg-gradient-to-br from-[#374151] to-[#111827]"></div> */}
       <div className="flex flex-col md:flex-row gap-6">
         <div

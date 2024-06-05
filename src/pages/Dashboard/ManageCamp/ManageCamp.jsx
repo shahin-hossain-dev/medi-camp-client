@@ -29,13 +29,13 @@ const ManageCamp = () => {
 
   const { mutateAsync } = useMutation({
     mutationFn: async (id) => {
-      const res = await axiosSecure.delete(`/camp/${id}`);
+      const res = await axiosSecure.delete(`/camp-delete/${id}`);
       return res.data;
     },
     onSuccess: (res) => {
-      refetch();
       if (res.deletedCount > 0) {
         alert("Deleted Camp!", "success");
+        refetch();
       }
     },
   });
@@ -64,12 +64,15 @@ const ManageCamp = () => {
   }
 
   return (
-    <div>
+    <div
+      style={{ boxShadow: "2px 2px 20px #00000033" }}
+      className="w-[95%] mt-5 md:mt-10 mx-auto p-3 rounded-md"
+    >
       <div className="w-full  text-center text-2xl md:text-3xl">
         <p className="mb-5 font-medium">All Camps</p>
       </div>
 
-      <div className="w-[90%] md:w-[90%] lg:w-[85%] mx-auto mt-12 mb-12">
+      <div className=" ">
         {/* table */}
         <div className="overflow-x-auto mt-12">
           <table className="table">

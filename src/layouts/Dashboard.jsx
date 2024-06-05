@@ -43,7 +43,7 @@ const Dashboard = () => {
         >
           <DashboardNav />
         </div>
-        <div className="md:col-span-7 lg:col-span-8">
+        <div className="md:col-span-7 lg:col-span-8 overflow-x-auto">
           <Outlet />
         </div>
       </div>
