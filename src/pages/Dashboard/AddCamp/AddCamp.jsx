@@ -23,7 +23,7 @@ const AddCamp = () => {
     // watch,
     formState: { errors },
     // setError,
-    // reset,
+    reset,
   } = useForm();
 
   const { mutateAsync } = useMutation({
@@ -33,12 +33,10 @@ const AddCamp = () => {
     },
     onSuccess: (res) => {
       console.log(res);
-      // alert title & button success
-      alert("Camp added successfully", "success");
-
       if (res.insertedId) {
-        alert("");
+        alert("Camp added Successfully", "success");
       }
+      reset();
     },
   });
 
