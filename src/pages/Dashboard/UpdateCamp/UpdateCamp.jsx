@@ -1,21 +1,43 @@
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAlert from "../../../hooks/useAlert";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useParams } from "react-router-dom";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 
-const AddCamp = () => {
+const UpdateCamp = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const alert = useAlert();
-  const [startDate, setStartDate] = useState(new Date());
-  // console.log(startDate.toISOString());
-  const dateAndTime = startDate.toISOString();
-  // console.log(moment(isoDate).format("DD, MMMM, YYYY"));
+  const { id } = useParams();
+  const [startDate, setStartDate] = useState(null);
+  const [updateDate, setUpdateDate] = useState(null);
+
+  useEffect(() => {
+    if (startDate) {
+      const dateAndTime = startDate?.toISOString();
+      setUpdateDate(dateAndTime);
+    }
+  }, [startDate]);
+
+  const {
+    data: camp,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["update-camp"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/camps/${id}`);
+      return res.data;
+    },
+  });
 
   const {
     register,
@@ -27,21 +49,20 @@ const AddCamp = () => {
   } = useForm();
 
   const { mutateAsync } = useMutation({
-    mutationFn: async (registerData) => {
-      const res = await axiosSecure.post("/camp-register", registerData);
+    mutationFn: async (updateData) => {
+      const res = await axiosSecure.patch(`/update-camp/${id}`, updateData);
       return res.data;
     },
     onSuccess: (res) => {
       console.log(res);
-      if (res.insertedId) {
-        alert("Camp added Successfully", "success");
+      if (res.modifiedCount > 0) {
+        alert("Camp Updated Successfully", "success");
+        refetch();
       }
-      reset();
     },
   });
 
-  const handleAddCamp = async (data) => {
-    console.log(data);
+  const handleUpdateCamp = async (data) => {
     const {
       campName,
       description,
@@ -54,6 +75,22 @@ const AddCamp = () => {
     // img bb image hosting api
     // 3 part: api - img file - headers
     const imgFile = { image: photo[0] };
+
+    if (!imgFile.image) {
+      const campInfo = {
+        image: camp?.image,
+        campName,
+        fees: parseInt(fees),
+        dateAndTime: updateDate,
+        location,
+        description,
+        healthcareProfessional,
+      };
+      console.log(campInfo);
+
+      await mutateAsync(campInfo);
+      return;
+    }
 
     const res = await axios.post(
       `https://api.imgbb.com/1/upload?key=${
@@ -73,16 +110,28 @@ const AddCamp = () => {
       image: userImage,
       campName,
       fees: parseInt(fees),
-      dateAndTime,
+      dateAndTime: updateDate,
       location,
       description,
       healthcareProfessional,
-      participantCount: 0,
-      createdBy: user?.email,
     };
+    console.log(campInfo);
 
     await mutateAsync(campInfo);
   };
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  const {
+    campName,
+    dateAndTime: campDate,
+    healthcareProfessional,
+    location,
+    fees,
+    description,
+  } = camp;
+
   return (
     <div>
       <div
@@ -92,9 +141,9 @@ const AddCamp = () => {
         {/* working  */}
         <div className=" shrink-0 w-full ">
           <h2 className="text-2xl md:text-3xl text-center font-medium">
-            Add a new Camp
+            Update a Camp
           </h2>
-          <form onSubmit={handleSubmit(handleAddCamp)} className="card-body">
+          <form onSubmit={handleSubmit(handleUpdateCamp)} className="card-body">
             <div className="">
               {/* row 1 */}
               <div className="flex flex-col md:flex-row md:gap-6">
@@ -106,6 +155,7 @@ const AddCamp = () => {
                     type="text"
                     className="input input-bordered rounded-sm"
                     placeholder="Camp Name"
+                    defaultValue={campName}
                     {...register("campName", { required: true })}
                   />
                   {errors.campName && (
@@ -123,6 +173,7 @@ const AddCamp = () => {
                     type="text"
                     className="input input-bordered rounded-sm"
                     placeholder="Ex: Dhaka, Bangladesh"
+                    defaultValue={location}
                     {...register("location", { required: true })}
                   />
                   {errors.location && (
@@ -144,6 +195,7 @@ const AddCamp = () => {
                     type="text"
                     className="input input-bordered  rounded-sm"
                     placeholder="Ex: Jhon Doe"
+                    defaultValue={healthcareProfessional}
                     {...register("healthcareProfessional", { required: true })}
                   />
                   {errors.healthcareProfessional && (
@@ -159,6 +211,7 @@ const AddCamp = () => {
                   <input
                     type="number"
                     className="input input-bordered rounded-sm"
+                    defaultValue={fees}
                     placeholder="Camp Fees"
                     {...register("fees", { required: true })}
                   />
@@ -177,7 +230,7 @@ const AddCamp = () => {
                   </label>
                   <input
                     type="file"
-                    {...register("photo", { required: true })}
+                    {...register("photo")}
                     placeholder="Upload your photo"
                     className="file-input file-input-bordered rounded-sm"
                   />
@@ -192,10 +245,10 @@ const AddCamp = () => {
                     <span className="label-text">Camp Date</span>
                   </label>
                   <DatePicker
-                    selected={startDate}
+                    selected={startDate || campDate}
                     onChange={(date) => setStartDate(date)}
                     timeInputLabel="Time:"
-                    dateFormat="MM/dd/yyyy h:mm aa"
+                    dateFormat="dd/MM/yyyy h:mm aa"
                     showTimeInput
                     className="input input-bordered rounded-sm w-full"
                   />
@@ -215,6 +268,7 @@ const AddCamp = () => {
                   <textarea
                     className="textarea textarea-bordered h-24 rounded-sm"
                     placeholder="Write about the camp."
+                    defaultValue={description}
                     {...register("description", { required: true })}
                   ></textarea>
                   {errors.phoneNumber && (
@@ -232,7 +286,7 @@ const AddCamp = () => {
                 className="btn text-[#ffffff] bg-gradient-to-br from-[#0066b2] to-[#003d6b] rounded-sm"
               >
                 <span className="relative text-base font-semibold">
-                  Add Camp
+                  Update Camp
                 </span>
               </button>
             </div>
@@ -243,4 +297,4 @@ const AddCamp = () => {
   );
 };
 
-export default AddCamp;
+export default UpdateCamp;

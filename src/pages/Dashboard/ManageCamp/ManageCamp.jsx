@@ -8,13 +8,11 @@ import useAlert from "../../../hooks/useAlert";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import moment from "moment";
 
 const ManageCamp = () => {
   const { user } = useAuth();
   const [allCamps, setAllCamps] = useState([]);
-  const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
   const alert = useAlert();
 
@@ -100,7 +98,7 @@ const ManageCamp = () => {
                   <td>{camp.healthcareProfessional}</td>
                   <td>
                     <div className="flex gap-3">
-                      <Link to={`/camp-update/${camp._id}`}>
+                      <Link to={`/dashboard/update-camp/${camp._id}`}>
                         <FaEdit className="text-2xl text-warning hover:rotate-180 duration-300 hover:duration-300" />
                       </Link>
                       <button onClick={() => handleDelete(camp._id)}>
