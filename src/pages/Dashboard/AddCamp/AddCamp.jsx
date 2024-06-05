@@ -7,16 +7,15 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
-import moment from "moment";
 
 const AddCamp = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const alert = useAlert();
   const [startDate, setStartDate] = useState(new Date());
-  console.log(startDate.toISOString());
-  const isoDate = startDate.toISOString();
-  console.log(moment(isoDate).format("DD, MMMM, YYYY"));
+  // console.log(startDate.toISOString());
+  const dateAndTime = startDate.toISOString();
+  // console.log(moment(isoDate).format("DD, MMMM, YYYY"));
 
   const {
     register,
@@ -34,6 +33,8 @@ const AddCamp = () => {
     },
     onSuccess: (res) => {
       console.log(res);
+      // alert title & button success
+      alert("Camp added successfully", "success");
 
       if (res.insertedId) {
         alert("");
@@ -43,7 +44,14 @@ const AddCamp = () => {
 
   const handleAddCamp = async (data) => {
     console.log(data);
-    const { photo } = data;
+    const {
+      campName,
+      description,
+      photo,
+      fees,
+      healthcareProfessional,
+      location,
+    } = data;
     // console.log(registerData);
     // img bb image hosting api
     // 3 part: api - img file - headers
@@ -62,9 +70,20 @@ const AddCamp = () => {
     );
 
     const userImage = res.data.data.url;
-    console.log(userImage);
 
-    await mutateAsync();
+    const campInfo = {
+      image: userImage,
+      campName,
+      fees: parseInt(fees),
+      dateAndTime,
+      location,
+      description,
+      healthcareProfessional,
+      participantCount: 0,
+      createdBy: user?.email,
+    };
+
+    await mutateAsync(campInfo);
   };
   return (
     <div>
@@ -190,13 +209,13 @@ const AddCamp = () => {
                 </div>
               </div>
               {/* row four */}
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="form-control w-full">
+              <div className="flex flex-col md:flex-row gap-6 ">
+                <div className="form-control w-full ">
                   <label className="label">
                     <span className="label-text">Description </span>
                   </label>
                   <textarea
-                    className="textarea textarea-bordered h-24"
+                    className="textarea textarea-bordered h-24 rounded-sm"
                     placeholder="Write about the camp."
                     {...register("description", { required: true })}
                   ></textarea>

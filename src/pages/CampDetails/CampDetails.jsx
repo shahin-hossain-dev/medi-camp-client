@@ -34,7 +34,6 @@ const CampDetails = () => {
     },
   });
   // console.log(camp);
-
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -51,6 +50,7 @@ const CampDetails = () => {
   } = camp;
 
   const date = moment(dateAndTime).format("DD/MM/YYYY, hh:mm a");
+
   return (
     <div className="w-[90%] mx-auto mt-12 ">
       <div className="flex justify-between border-b border-b-[#003d6b99]  pb-4  mb-6">
@@ -134,7 +134,7 @@ const CampDetails = () => {
           </div>
           <div className="my-6">
             <p className="font-medium mb-3">Medical Services</p>
-            {medicalServices.map((service, idx) => (
+            {medicalServices?.map((service, idx) => (
               <p key={idx} className="flex items-center gap-3 space-y-2">
                 <SiTicktick className="text-[#efb312]" />
                 <span className="text-gray-500">{service}</span>
