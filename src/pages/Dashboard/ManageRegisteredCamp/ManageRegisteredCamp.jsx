@@ -114,7 +114,7 @@ const ManageRegisteredCamp = () => {
                 <tr key={camp._id}>
                   <td>{camp.participantName}</td>
                   <td>{camp.campName}</td>
-                  <td>{camp.fees}</td>
+                  <td>$ {camp.fees}</td>
 
                   <td>
                     <span
