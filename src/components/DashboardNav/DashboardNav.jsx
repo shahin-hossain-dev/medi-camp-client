@@ -4,7 +4,9 @@ import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { LuFolderEdit } from "react-icons/lu";
 import DashboardLink from "../DashboardLink/DashboardLink";
-
+import { IoAnalyticsSharp } from "react-icons/io5";
+import { MdOutlineBookmarkAdded } from "react-icons/md";
+import { MdOutlinePayment } from "react-icons/md";
 const DashboardNav = () => {
   return (
     <div className="bg-[#003d6b] pt-20 p-5 md:p-5 min-h-screen ">
@@ -35,6 +37,30 @@ const DashboardNav = () => {
           <DashboardLink to={"registered-camp"}>
             <LuFolderEdit className=" text-lg" />
             <span>Manage Registered Camps</span>
+          </DashboardLink>
+        </li>
+        <li>
+          <DashboardLink to={"analytics"}>
+            <IoAnalyticsSharp className=" text-lg" />
+            <span>Analytics</span>
+          </DashboardLink>
+        </li>
+        <li>
+          <DashboardLink to={"participant-profile"}>
+            <FaRegUserCircle className=" text-lg" />
+            <span>Participant Profile</span>
+          </DashboardLink>
+        </li>
+        <li>
+          <DashboardLink to={"participant-registered-camps"}>
+            <MdOutlineBookmarkAdded className=" text-xl" />
+            <span>Registered Camps</span>
+          </DashboardLink>
+        </li>
+        <li>
+          <DashboardLink to={"payment-history"}>
+            <MdOutlinePayment className=" text-xl" />
+            <span>Payment History</span>
           </DashboardLink>
         </li>
       </ul>
