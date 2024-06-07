@@ -6,12 +6,14 @@ import useAlert from "../../../hooks/useAlert";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisteredCamps = () => {
   const { user } = useAuth();
   const [allCamps, setAllCamps] = useState([]);
   const axiosSecure = useAxiosSecure();
   const alert = useAlert();
+  const navigate = useNavigate();
 
   const { data, isLoading, refetch } = useQuery({
     queryFn: async () => {
@@ -37,26 +39,8 @@ const RegisteredCamps = () => {
     },
   });
 
-  const handleConfirm = (id) => {
-    Swal.fire({
-      title: "Are you confirm it?",
-      text: "You won't be able to revert it!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Confirm it!",
-      background: "linear-gradient(to left top, #0066b2, #003d6b)",
-      color: "White",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const res = await axiosSecure.put(`/confirm-camp/${id}`);
-        if (res.data.modifiedCount > 0) {
-          alert("Confirmed!", "success");
-          refetch();
-        }
-      }
-    });
+  const handlePayment = (id) => {
+    navigate("/dashboard/payment", { state: { id } });
   };
 
   const handleCancel = (id) => {
@@ -119,7 +103,7 @@ const RegisteredCamps = () => {
 
                   <td>
                     <button
-                      onClick={() => handleConfirm(camp._id)}
+                      onClick={() => handlePayment(camp._id)}
                       className={` px-2 py-1 rounded-md ${
                         camp.paymentStatus ? "bg-green-100" : "bg-red-100"
                       }`}
