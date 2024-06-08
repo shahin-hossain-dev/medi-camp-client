@@ -17,6 +17,7 @@ import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 import RegisteredCamps from "../pages/Dashboard/RegisteredCamps/RegisteredCamps";
 import ParticipantProfile from "../pages/Dashboard/ParticipantProfile/ParticipantProfile";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import OrganizerRoute from "./OrganizerRoute";
 
 const router = createBrowserRouter([
   {
@@ -59,7 +60,11 @@ const router = createBrowserRouter([
       },
       {
         path: "add-camp",
-        element: <AddCamp />,
+        element: (
+          <OrganizerRoute>
+            <AddCamp />
+          </OrganizerRoute>
+        ),
       },
       {
         path: "manage-camp",

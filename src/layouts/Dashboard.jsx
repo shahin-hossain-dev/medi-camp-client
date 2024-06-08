@@ -4,9 +4,11 @@ import DashboardNav from "../components/DashboardNav/DashboardNav";
 import { useState } from "react";
 
 import useAuth from "../hooks/useAuth";
+import useUserRole from "../hooks/useUserRole";
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
+
   return (
     <div>
       <h2 className="md:px-5 flex justify-between items-center py-2 lg:py-4 text-xl md:text-3xl font-medium text-white text-center bg-gradient-to-bl from-[#0066b2] to-[#003d6b]">
