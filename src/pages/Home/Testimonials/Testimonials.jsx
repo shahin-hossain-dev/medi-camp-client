@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
-import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
