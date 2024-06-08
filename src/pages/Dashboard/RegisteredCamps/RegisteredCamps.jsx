@@ -23,38 +23,47 @@ const RegisteredCamps = () => {
 
   const numberOfPage = Math.ceil(count / itemsPerPage);
   const pages = [...Array(numberOfPage).keys()];
-  console.log(count / itemsPerPage);
-  useEffect(() => {
-    const count = async () => {
+  // console.log(count / itemsPerPage);
+  // useEffect(() => {
+  //   const count = async () => {
+  //     const res = await axiosSecure.get(`/campCount?email=${user?.email}`);
+  //     setCount(res.data.count);
+  //   };
+  //   count();
+  // }, [axiosSecure, user?.email]);
+  const { data: counts } = useQuery({
+    queryKey: ["count", currentPage],
+    queryFn: async () => {
       const res = await axiosSecure.get(`/campCount?email=${user?.email}`);
       setCount(res.data.count);
-    };
-    count();
-  }, [axiosSecure, user?.email]);
+      return res.data.count;
+    },
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await axiosSecure.get(
-        `/participant-camps?email=${user?.email}&page=${currentPage}&size=${itemsPerPage}`
-      );
-      setAllCamps(res.data);
-    };
-    fetchData();
-  }, [axiosSecure, currentPage, itemsPerPage, user?.email]);
-
-  // --------------------pagination---------------------
-  // const { data, isLoading, refetch } = useQuery({
-  //   queryKey: ["applied-data"],
-  //   queryFn: async () => {
+  // useEffect(() => {
+  //   const fetchData = async () => {
   //     const res = await axiosSecure.get(
   //       `/participant-camps?email=${user?.email}&page=${currentPage}&size=${itemsPerPage}`
   //     );
-  //     console.log(res.data);
-
   //     setAllCamps(res.data);
-  //     return res.data;
-  //   },
-  // });
+  //   };
+  //   fetchData();
+  // }, [axiosSecure, currentPage, itemsPerPage, user?.email]);
+
+  // --------------------pagination---------------------
+
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["applied-data", currentPage],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/participant-camps?email=${user?.email}&page=${currentPage}&size=${itemsPerPage}`
+      );
+      console.log(res.data);
+
+      setAllCamps(res.data);
+      return res.data;
+    },
+  });
 
   const { mutateAsync } = useMutation({
     mutationFn: async (id) => {
@@ -64,7 +73,7 @@ const RegisteredCamps = () => {
     onSuccess: (res) => {
       if (res.deletedCount > 0) {
         alert("Cancel Camp Successfully", "success");
-        refetch();
+        // refetch();
       }
     },
   });
@@ -121,9 +130,9 @@ const RegisteredCamps = () => {
     // refetch();
   };
 
-  // if (isLoading) {
-  //   return <LoadingSpinner />;
-  // }
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div
