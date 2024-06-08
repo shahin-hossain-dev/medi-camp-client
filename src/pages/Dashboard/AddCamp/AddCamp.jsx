@@ -217,9 +217,9 @@ const AddCamp = () => {
                     placeholder="Write about the camp."
                     {...register("description", { required: true })}
                   ></textarea>
-                  {errors.phoneNumber && (
+                  {errors.description && (
                     <span className="text-red-500 mt-1 text-start">
-                      Please fill up phone number field
+                      Please fill up description field
                     </span>
                   )}
                 </div>

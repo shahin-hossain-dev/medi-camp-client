@@ -5,7 +5,7 @@ const SectionTitle = () => {
         <h2 className="text-2xl md:text-4xl font-bold text-[#003d6b]">
           Our <span className="text-[#efb312]">Popular</span> Medical Camp
         </h2>
-        <p className="px-10">
+        <p className="px-10 text-slate-500">
           Discover the impactful stories from our top medical camps in
           Bangladesh, showcasing remarkable health outcomes.
         </p>

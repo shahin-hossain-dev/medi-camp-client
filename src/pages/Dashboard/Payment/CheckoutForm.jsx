@@ -1,11 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAlert from "../../../hooks/useAlert";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 
 const CheckoutForm = ({ campId }) => {
   const [error, setError] = useState("");
@@ -99,15 +99,16 @@ const CheckoutForm = ({ campId }) => {
 
         // now save payment info in the database
         const payment = {
+          campName: camp?.campName,
+          fees: camp?.fees,
           email: user?.email,
-          price: camp?.fees,
           transactionId: paymentIntent.id,
           transactionDate: new Date(), // utc date convert using moment js
           registeredId: camp?._id,
           campId: camp?.campId,
           paymentStatus: true,
         };
-        console.log(payment);
+        // console.log(payment);
 
         const res = await axiosSecure.post(`/payments/${camp._id}`, payment);
         console.log("payment saved", res.data);
@@ -119,6 +120,9 @@ const CheckoutForm = ({ campId }) => {
       }
     }
   };
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div className=" min-h-screen flex justify-center items-center">
       <div className="min-w-[400px] mx-auto shadow-2xl p-5 border">

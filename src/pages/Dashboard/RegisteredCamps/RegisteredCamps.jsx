@@ -6,11 +6,13 @@ import useAlert from "../../../hooks/useAlert";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { Link, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { VscFeedback } from "react-icons/vsc";
+import FeedbackModal from "../../../components/Modals/FeedbackModal";
 const RegisteredCamps = () => {
   const { user } = useAuth();
   const [allCamps, setAllCamps] = useState([]);
+  const [feedback, setFeedback] = useState({});
   const axiosSecure = useAxiosSecure();
   const alert = useAlert();
   const navigate = useNavigate();
@@ -62,6 +64,16 @@ const RegisteredCamps = () => {
     // const remainingJobs = data.filter();
     // console.log(id);
     // setAllJobs(remainingJobs);
+  };
+  const handleFeedbackModal = (camp) => {
+    const { campName, campId, _id } = camp;
+    const feedbackInfo = {
+      campName,
+      campId,
+      registeredId: _id,
+    };
+    setFeedback(feedbackInfo);
+    document.getElementById("feedback-modal").showModal();
   };
 
   if (isLoading) {
@@ -141,7 +153,18 @@ const RegisteredCamps = () => {
                     </div>
                   </td>
                   <td>
-                    <button>Feedback</button>
+                    <button
+                      onClick={() => handleFeedbackModal(camp)}
+                      disabled={
+                        camp.paymentStatus !== true ||
+                        camp.confirmationStatus !== "confirmed"
+                      }
+                      className="disabled:text-gray-500 text-[#003d6b]"
+                    >
+                      <VscFeedback
+                        className={`text-2xl  inline me-1 hover:scale-125 active:scale-100 ac duration-300 hover:duration-300`}
+                      />
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -149,6 +172,7 @@ const RegisteredCamps = () => {
           </table>
         </div>
       </div>
+      <FeedbackModal feedback={feedback} />
     </div>
   );
 };
