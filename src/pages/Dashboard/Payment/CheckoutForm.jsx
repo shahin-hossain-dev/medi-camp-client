@@ -102,14 +102,14 @@ const CheckoutForm = ({ campId }) => {
           email: user?.email,
           price: camp?.fees,
           transactionId: paymentIntent.id,
-          date: new Date(), // utc date convert using moment js
+          transactionDate: new Date(), // utc date convert using moment js
           registeredId: camp?._id,
           campId: camp?.campId,
-          status: "pending",
+          paymentStatus: true,
         };
         console.log(payment);
 
-        const res = await axiosSecure.post("/payments", payment);
+        const res = await axiosSecure.post(`/payments/${camp._id}`, payment);
         console.log("payment saved", res.data);
         refetch();
         if (res.data?.insertedId) {

@@ -128,7 +128,7 @@ const RegisteredCamps = () => {
                     <div className="flex gap-3">
                       <button
                         disabled={
-                          camp.paymentStatus &&
+                          camp.paymentStatus ||
                           camp.confirmationStatus === "confirmed"
                         }
                         className="disabled:text-gray-500 text-error"
