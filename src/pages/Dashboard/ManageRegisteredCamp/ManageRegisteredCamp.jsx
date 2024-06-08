@@ -206,6 +206,7 @@ const ManageRegisteredCamp = () => {
           </table>
         </div>
       </div>
+      {/* pagination buttons */}
       <div>
         <button
           className="btn  me-2 bg-gradient-to-br from-[#0066b2] to-[#003d6b] text-white"
