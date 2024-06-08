@@ -1,7 +1,9 @@
+import UserProfile from "../../../components/UserProfile/UserProfile";
+
 const ParticipantProfile = () => {
   return (
     <div>
-      <h2>ParticipantProfile</h2>
+      <UserProfile />
     </div>
   );
 };

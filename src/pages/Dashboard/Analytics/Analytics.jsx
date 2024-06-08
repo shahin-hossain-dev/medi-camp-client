@@ -12,24 +12,6 @@ import {
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
-const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
-
-const getPath = (x, y, width, height) => {
-  return `M${x},${y + height}C${x + width / 3},${y + height} ${x + width / 2},${
-    y + height / 3
-  }
-  ${x + width / 2}, ${y}
-  C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${
-    x + width
-  }, ${y + height}
-  Z`;
-};
-
-const TriangleBar = (props) => {
-  const { fill, x, y, width, height } = props;
-
-  return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
-};
 
 const Analytics = () => {
   const { user } = useAuth();
@@ -40,15 +22,33 @@ const Analytics = () => {
       const res = await axiosSecure.get(
         `/participant-camps?email=${user?.email}`
       );
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });
+  const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
+  const getPath = (x, y, width, height) => {
+    return `M${x},${y + height}C${x + width / 3},${y + height} ${
+      x + width / 2
+    },${y + height / 3}
+    ${x + width / 2}, ${y}
+    C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${
+      x + width
+    }, ${y + height}
+    Z`;
+  };
+
+  const TriangleBar = (props) => {
+    const { fill, x, y, width, height } = props;
+
+    return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
+  };
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
   return (
-    <div className="mt-24">
+    <div className="mt-12">
       <h2 className="text-2xl md:text-3xl font-medium mb-12 text-center ">
         Analytics
       </h2>
@@ -61,10 +61,8 @@ const Analytics = () => {
           <XAxis
             dataKey="campName"
             angle={-45}
-            offset={10}
             dy={40}
             dx={-40}
-            value={data.map((d) => d.campName)}
             style={{
               fontSize: "80%",
               textAlign: "end",
