@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Swal from "sweetalert2";
 import useAlert from "../../../hooks/useAlert";
@@ -9,6 +9,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import { VscFeedback } from "react-icons/vsc";
 import FeedbackModal from "../../../components/Modals/FeedbackModal";
+import "./registerCamp.css";
 const RegisteredCamps = () => {
   const { user } = useAuth();
   const [allCamps, setAllCamps] = useState([]);
@@ -16,17 +17,44 @@ const RegisteredCamps = () => {
   const axiosSecure = useAxiosSecure();
   const alert = useAlert();
   const navigate = useNavigate();
+  const [count, setCount] = useState(0);
+  const [itemsPerPage, setItemPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
 
-  const { data, isLoading, refetch } = useQuery({
-    queryFn: async () => {
+  const numberOfPage = Math.ceil(count / itemsPerPage);
+  const pages = [...Array(numberOfPage).keys()];
+  console.log(count / itemsPerPage);
+  useEffect(() => {
+    const count = async () => {
+      const res = await axiosSecure.get(`/campCount?email=${user?.email}`);
+      setCount(res.data.count);
+    };
+    count();
+  }, [axiosSecure, user?.email]);
+
+  useEffect(() => {
+    const fetchData = async () => {
       const res = await axiosSecure.get(
-        `/participant-camps?email=${user?.email}`
+        `/participant-camps?email=${user?.email}&page=${currentPage}&size=${itemsPerPage}`
       );
       setAllCamps(res.data);
-      return res.data;
-    },
-    queryKey: ["applied-data"],
-  });
+    };
+    fetchData();
+  }, [axiosSecure, currentPage, itemsPerPage, user?.email]);
+
+  // --------------------pagination---------------------
+  // const { data, isLoading, refetch } = useQuery({
+  //   queryKey: ["applied-data"],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get(
+  //       `/participant-camps?email=${user?.email}&page=${currentPage}&size=${itemsPerPage}`
+  //     );
+  //     console.log(res.data);
+
+  //     setAllCamps(res.data);
+  //     return res.data;
+  //   },
+  // });
 
   const { mutateAsync } = useMutation({
     mutationFn: async (id) => {
@@ -76,9 +104,26 @@ const RegisteredCamps = () => {
     document.getElementById("feedback-modal").showModal();
   };
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  // pagination area ---------------->
+  const handlePage = (page) => {
+    setCurrentPage(page);
+  };
+  const handlePrevButton = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+    // refetch();
+  };
+  const handleNextButton = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+    // refetch();
+  };
+
+  // if (isLoading) {
+  //   return <LoadingSpinner />;
+  // }
 
   return (
     <div
@@ -116,7 +161,7 @@ const RegisteredCamps = () => {
                   <td>
                     <button
                       onClick={() => handlePayment(camp._id)}
-                      className={` px-2 py-1 rounded-md ${
+                      className={` px-2 py-1 rounded-md  ${
                         camp.paymentStatus ? "bg-green-100" : "bg-red-100"
                       }`}
                     >
@@ -173,6 +218,33 @@ const RegisteredCamps = () => {
         </div>
       </div>
       <FeedbackModal feedback={feedback} />
+      <div>
+        <button
+          className="btn  me-2 bg-gradient-to-br from-[#0066b2] to-[#003d6b] text-white"
+          onClick={handlePrevButton}
+        >
+          Prev
+        </button>
+        {pages.map((page) => (
+          <button
+            onClick={() => handlePage(page)}
+            key={page}
+            className={`btn border me-2  ${
+              currentPage === page
+                ? "bg-gradient-to-br from-[#0066b2] to-[#003d6b] text-white"
+                : undefined
+            }`}
+          >
+            {page + 1}
+          </button>
+        ))}
+        <button
+          className="btn bg-gradient-to-br from-[#0066b2] to-[#003d6b] text-white me-2"
+          onClick={handleNextButton}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
