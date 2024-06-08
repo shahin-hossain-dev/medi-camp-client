@@ -5,6 +5,8 @@ import axios from "axios";
 import useAlert from "../../hooks/useAlert";
 import { useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { signOut } from "firebase/auth";
+import auth from "../../firebase/firebase.config";
 
 const Register = () => {
   const { userCreate, updateUserProfile, logOut } = useAuth();
@@ -49,14 +51,14 @@ const Register = () => {
     if (res.data.success) {
       userCreate(email, password)
         .then((result) => {
-          console.log(result.user);
           if (result.user) {
             updateUserProfile(name, userImage).then(async () => {
               //todo: user post to database
               const user = { name, email, role };
               const res = await axiosPublic.post("/users", user);
               console.log(res.data);
-              logOut();
+              // logOut();
+              signOut(auth);
               navigate("/join-us");
               alert("Account Created Successfully", "success");
             });
