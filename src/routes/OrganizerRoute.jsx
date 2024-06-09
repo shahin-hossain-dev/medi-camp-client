@@ -5,9 +5,9 @@ import useUserRole from "../hooks/useUserRole";
 
 const OrganizerRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  const [role] = useUserRole();
+  const [role, isLoading] = useUserRole();
   const location = useLocation();
-  if (loading) {
+  if (loading || isLoading) {
     return <LoadingSpinner />;
   }
 
