@@ -6,8 +6,8 @@ const ActiveLink = ({ children, to }) => {
       to={to}
       className={({ isActive }) =>
         isActive
-          ? "nav-item text-white text-base font-medium"
-          : " text-white text-base font-medium nav-non-select"
+          ? "nav-item text-neutral lg:text-white text-base font-medium"
+          : "text-neutral lg:text-white text-base font-medium nav-non-select"
       }
     >
       {children}

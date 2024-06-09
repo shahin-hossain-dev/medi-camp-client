@@ -50,7 +50,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content  mt-3 z-[1] p-2 shadow bg-base-100 rounded-md w-52"
+            className="menu menu-sm dropdown-content  mt-3 z-[10] p-2  shadow bg-base-100 rounded-md w-52"
           >
             {navLinks}
           </ul>
@@ -58,7 +58,7 @@ const Navbar = () => {
         {/* <h2 className=" text-xl text-[#ffffff] md:text-3xl font-bold">
           MediCamp
         </h2> */}
-        <img src={logo} className="lg:w-[200px]" alt="" />
+        <img src={logo} className="w-[150px] md:w-[200px]" alt="" />
       </div>
       <div className="navbar-center justify-center hidden lg:flex">
         <ul className="flex gap-5 text-[#ffffff]">{navLinks}</ul>
