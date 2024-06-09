@@ -5,9 +5,11 @@ import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 
 import useAlert from "../../hooks/useAlert";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const JoinUs = () => {
   const { userLogin, googleLogin } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const alert = useAlert();
   const [error, setError] = useState("");
   const location = useLocation();
@@ -34,7 +36,7 @@ const JoinUs = () => {
 
     userLogin(email, password)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         if (result.user) {
           alert("Login Successfully", "success");
         }
@@ -52,8 +54,14 @@ const JoinUs = () => {
   // handle Google login
   const handleGoogleLogin = () => {
     googleLogin()
-      .then((result) => {
+      .then(async (result) => {
         if (result.user) {
+          const loggedUser = result.user;
+          const name = loggedUser?.displayName;
+          const email = loggedUser?.email;
+          const user = { name, email, role: "participant" };
+          const res = await axiosPublic.post("/users", user);
+          console.log(res.data);
           alert("Login Successfully", "success");
           navigate(from);
         }

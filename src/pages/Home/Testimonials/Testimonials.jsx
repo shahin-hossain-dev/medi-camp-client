@@ -19,7 +19,7 @@ const Testimonials = () => {
     queryKey: ["testimonials"],
     queryFn: async () => {
       const res = await axiosPublic.get("/feedback");
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });

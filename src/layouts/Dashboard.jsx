@@ -8,6 +8,7 @@ import useUserRole from "../hooks/useUserRole";
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
+  const [role, isLoading] = useUserRole();
 
   return (
     <div>
@@ -24,7 +25,7 @@ const Dashboard = () => {
       <div className="grid md:grid-cols-10">
         {/* dashboard nav bar */}
         <div className="hidden md:flex md:col-span-3 lg:col-span-2">
-          <DashboardNav />
+          <DashboardNav role={role} isLoading={isLoading} />
         </div>
         <button
           className={`absolute md:hidden p-5 z-30 ${

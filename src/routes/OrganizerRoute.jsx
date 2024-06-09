@@ -5,14 +5,14 @@ import useUserRole from "../hooks/useUserRole";
 
 const OrganizerRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  const role = useUserRole();
+  const [role] = useUserRole();
   const location = useLocation();
   if (loading) {
     return <LoadingSpinner />;
   }
 
   if (!user || role !== "organizer") {
-    return <Navigate to={"/join-us"} state={location?.pathname} />;
+    return <Navigate to={"/"} state={location?.pathname} />;
   }
   return children;
 };
