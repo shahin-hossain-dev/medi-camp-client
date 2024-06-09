@@ -24,7 +24,7 @@ const Dashboard = () => {
       </h2>
       <div className="grid md:grid-cols-10">
         {/* dashboard nav bar */}
-        <div className="hidden md:flex md:col-span-3 lg:col-span-2">
+        <div className="hidden  top-0  md:flex md:col-span-3 lg:col-span-2">
           <DashboardNav role={role} isLoading={isLoading} />
         </div>
         <button
@@ -44,7 +44,7 @@ const Dashboard = () => {
               : "-translate-x-[100%] duration-300"
           } `}
         >
-          <DashboardNav />
+          <DashboardNav role={role} isLoading={isLoading} />
         </div>
         <div className="md:col-span-7 lg:col-span-8 overflow-x-auto">
           <Outlet />

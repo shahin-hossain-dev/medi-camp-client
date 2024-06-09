@@ -9,15 +9,50 @@ const PaymentHistory = () => {
   const { user } = useAuth();
   const [allPayments, setAllPayments] = useState([]);
   const axiosSecure = useAxiosSecure();
+  const [count, setCount] = useState(0);
+  const [itemsPerPage, setItemPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const numberOfPage = Math.ceil(count / itemsPerPage);
+  const pages = [...Array(numberOfPage).keys()];
+
+  const { data: counts } = useQuery({
+    queryKey: ["count", currentPage],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/paymentCount?email=${user?.email}`);
+      console.log(res.data.count);
+      setCount(res.data.count);
+      return res.data.count;
+    },
+  });
 
   const { data, isLoading, refetch } = useQuery({
+    queryKey: ["payment-data", currentPage],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/payments?email=${user?.email}`);
+      const res = await axiosSecure.get(
+        `/payments?email=${user?.email}&page=${currentPage}&size=${itemsPerPage}`
+      );
       setAllPayments(res.data);
       return res.data;
     },
-    queryKey: ["payment-data"],
   });
+
+  // pagination area ---------------->
+  const handlePage = (page) => {
+    setCurrentPage(page);
+  };
+  const handlePrevButton = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+    // refetch();
+  };
+  const handleNextButton = () => {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+    // refetch();
+  };
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -84,6 +119,34 @@ const PaymentHistory = () => {
             </tbody>
           </table>
         </div>
+      </div>
+      {/* pagination buttons */}
+      <div>
+        <button
+          className="btn  me-2 bg-gradient-to-br from-[#0066b2] to-[#003d6b] text-white"
+          onClick={handlePrevButton}
+        >
+          Prev
+        </button>
+        {pages.map((page) => (
+          <button
+            onClick={() => handlePage(page)}
+            key={page}
+            className={`btn border me-2  ${
+              currentPage === page
+                ? "bg-gradient-to-br from-[#0066b2] to-[#003d6b] text-white"
+                : undefined
+            }`}
+          >
+            {page + 1}
+          </button>
+        ))}
+        <button
+          className="btn bg-gradient-to-br from-[#0066b2] to-[#003d6b] text-white me-2"
+          onClick={handleNextButton}
+        >
+          Next
+        </button>
       </div>
     </div>
   );
