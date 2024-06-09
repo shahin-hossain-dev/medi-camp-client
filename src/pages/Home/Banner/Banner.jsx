@@ -2,7 +2,7 @@ import { bannerData } from "./BannerData";
 import { FaRegCalendarCheck } from "react-icons/fa6";
 import { Navigation, Pagination, Scrollbar, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import logo1 from "../../../assets/logo1.png";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -34,7 +34,8 @@ const Banner = () => {
                   {slide.title}
                 </h2>
               </div>
-              <div className="flex-1 hidden md:block space-y-5 p-4 md:p-10">
+              <div className="flex-1 relative hidden md:block space-y-5 p-4 md:p-10">
+                <h4 className="text-2xl text-[#003d6b]">Our Achievements</h4>
                 <h2 className="lg:text-5xl font-bold text-[#003d6b]">
                   {slide.title}
                 </h2>
@@ -43,6 +44,11 @@ const Banner = () => {
                   <FaRegCalendarCheck className="text-[#003d6b]" />{" "}
                   <span>{slide.date}</span>
                 </span>
+                <img
+                  src={logo1}
+                  alt=""
+                  className="absolute right-20 -bottom-10 w-[150px]"
+                />
               </div>
               <div className="flex-1  h-full">
                 <img
@@ -52,6 +58,7 @@ const Banner = () => {
                 />
               </div>
             </div>
+
             <div className="w-[200px] absolute hidden lg:flex h-[200px] bg-[] bg-gradient-to-br from-[#0066b2] to-[#003d6b] rounded-full -bottom-24 -left-24"></div>
           </SwiperSlide>
         ))}

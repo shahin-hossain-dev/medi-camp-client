@@ -5,7 +5,7 @@ import useAuth from "../../../hooks/useAuth";
 import { FaRegUser } from "react-icons/fa6";
 import { TbCategory } from "react-icons/tb";
 import { MdLogout } from "react-icons/md";
-
+import logo from "../../../assets/logo.png";
 import useAlert from "../../../hooks/useAlert";
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -55,9 +55,10 @@ const Navbar = () => {
             {navLinks}
           </ul>
         </div>
-        <h2 className=" text-xl text-[#ffffff] md:text-3xl font-bold">
+        {/* <h2 className=" text-xl text-[#ffffff] md:text-3xl font-bold">
           MediCamp
-        </h2>
+        </h2> */}
+        <img src={logo} className="lg:w-[200px]" alt="" />
       </div>
       <div className="navbar-center justify-center hidden lg:flex">
         <ul className="flex gap-5 text-[#ffffff]">{navLinks}</ul>
