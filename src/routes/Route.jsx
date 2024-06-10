@@ -63,7 +63,11 @@ const router = createBrowserRouter([
       },
       {
         path: "organizer-profile",
-        element: <OrganizerProfile />,
+        element: (
+          <OrganizerRoute>
+            <OrganizerProfile />
+          </OrganizerRoute>
+        ),
       },
       {
         path: "add-camp",
@@ -75,15 +79,27 @@ const router = createBrowserRouter([
       },
       {
         path: "manage-camp",
-        element: <ManageCamp />,
+        element: (
+          <OrganizerRoute>
+            <ManageCamp />
+          </OrganizerRoute>
+        ),
       },
       {
         path: "registered-camp",
-        element: <ManageRegisteredCamp />,
+        element: (
+          <OrganizerRoute>
+            <ManageRegisteredCamp />
+          </OrganizerRoute>
+        ),
       },
       {
         path: "update-camp/:id",
-        element: <UpdateCamp />,
+        element: (
+          <OrganizerRoute>
+            <UpdateCamp />
+          </OrganizerRoute>
+        ),
       },
       {
         path: "analytics",

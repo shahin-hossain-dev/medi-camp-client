@@ -86,7 +86,10 @@ const Analytics = () => {
               label={{ position: "top" }}
             >
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={colors[index % colors.length]}
+                />
               ))}
             </Bar>
           </BarChart>
