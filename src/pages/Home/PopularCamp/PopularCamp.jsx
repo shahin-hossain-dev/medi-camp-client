@@ -6,7 +6,6 @@ import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import { Link } from "react-router-dom";
 
 const PopularCamp = () => {
-  // http://localhost:5000/popular-camps?sort=dsc
   const axiosPublic = useAxiosPublic();
 
   const { data: camps, isLoading } = useQuery({

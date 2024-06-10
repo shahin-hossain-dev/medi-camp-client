@@ -9,7 +9,7 @@ import NotFound from "../../../components/NotFound/NotFound";
 import PageOfShow from "../../../components/PageOfShow/PageOfShow";
 
 const PaymentHistory = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [allPayments, setAllPayments] = useState([]);
   const axiosSecure = useAxiosSecure();
   const [count, setCount] = useState(0);
@@ -29,7 +29,7 @@ const PaymentHistory = () => {
     },
   });
 
-  const { data, isLoading, refetch } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["payment-data", currentPage],
     queryFn: async () => {
       const res = await axiosSecure.get(

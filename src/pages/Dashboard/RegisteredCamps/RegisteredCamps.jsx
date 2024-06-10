@@ -141,7 +141,7 @@ const RegisteredCamps = () => {
       <div className="w-full  text-center text-2xl md:text-3xl">
         <p className="mb-5 font-medium">Registered Camps</p>
       </div>
-      <Search data={data} setAllCamps={setAllCamps} setCount={setCount} />
+      <Search data={data} setAllCamps={setAllCamps} />
       <div className=" ">
         {/* table */}
         <div className="overflow-x-auto mt-12">
