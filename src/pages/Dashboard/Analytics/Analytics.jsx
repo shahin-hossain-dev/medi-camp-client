@@ -53,38 +53,44 @@ const Analytics = () => {
         Analytics
       </h2>
       <ResponsiveContainer width="100%" height={600}>
-        <BarChart
-          data={data}
-          margin={{ top: 20, right: 5, bottom: 200, left: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis
-            dataKey="campName"
-            angle={-45}
-            dy={40}
-            dx={-40}
-            style={{
-              fontSize: "80%",
-              textAlign: "end",
-              fill: "gray",
-              padding: "100px",
-            }}
-          />
-
-          <YAxis />
-          <Tooltip />
-
-          <Bar
-            dataKey="fees"
-            fill="#8884d8"
-            shape={<TriangleBar />}
-            label={{ position: "top" }}
+        {data.length === 0 ? (
+          <h2 className=" text-xl md:text-2xl text-neutral-500 text-center">
+            Result Not Found
+          </h2>
+        ) : (
+          <BarChart
+            data={data}
+            margin={{ top: 20, right: 5, bottom: 200, left: 5 }}
           >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index % 20]} />
-            ))}
-          </Bar>
-        </BarChart>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis
+              dataKey="campName"
+              angle={-45}
+              dy={40}
+              dx={-40}
+              style={{
+                fontSize: "80%",
+                textAlign: "end",
+                fill: "gray",
+                padding: "100px",
+              }}
+            />
+
+            <YAxis />
+            <Tooltip />
+
+            <Bar
+              dataKey="fees"
+              fill="#8884d8"
+              shape={<TriangleBar />}
+              label={{ position: "top" }}
+            >
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+              ))}
+            </Bar>
+          </BarChart>
+        )}
       </ResponsiveContainer>
     </div>
   );
