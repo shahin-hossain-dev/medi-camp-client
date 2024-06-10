@@ -1,6 +1,6 @@
 import moment from "moment";
 
-const Search = ({ data, setAllCamps }) => {
+const Search = ({ data, setAllCamps, setCount }) => {
   //  search handle
   // search camp with keywords
   const handleSearch = (e) => {
@@ -17,6 +17,8 @@ const Search = ({ data, setAllCamps }) => {
           ?.includes(searchText.toLowerCase()) ||
         moment(camp.transactionDate)?.format("DD-MM-YYYY")?.includes(searchText)
     );
+
+    setCount(campSearch.length);
     setAllCamps(campSearch);
   };
 

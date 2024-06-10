@@ -1,6 +1,4 @@
 const PageOfShow = ({ currentPage, itemsPerPage, allCamps, count }) => {
-  console.log(currentPage, itemsPerPage, allCamps, count);
-
   const preState = currentPage * itemsPerPage;
   const stepNext = (currentPage + 1) * itemsPerPage;
   const overCount = stepNext > count;
@@ -11,8 +9,9 @@ const PageOfShow = ({ currentPage, itemsPerPage, allCamps, count }) => {
 
   return (
     <span className="text-neutral-500">
-      Showing <span>{preState + 1} </span> - <span>{remainingCount}</span> from{" "}
-      {count}
+      Showing <span>{allCamps.length === 0 ? 0 : preState + 1} </span> -{" "}
+      <span>{allCamps.length === 0 ? 0 : remainingCount}</span> from{" "}
+      {allCamps.length === 0 ? 0 : count}
     </span>
   );
 };

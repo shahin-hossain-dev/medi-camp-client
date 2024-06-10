@@ -13,6 +13,7 @@ import "./registerCamp.css";
 import Search from "../../../components/Search/Search";
 import NotFound from "../../../components/NotFound/NotFound";
 import PageOfShow from "../../../components/PageOfShow/PageOfShow";
+
 const RegisteredCamps = () => {
   const { user } = useAuth();
   const [allCamps, setAllCamps] = useState([]);
@@ -23,7 +24,6 @@ const RegisteredCamps = () => {
   const [count, setCount] = useState(0);
   const [itemsPerPage, setItemPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(0);
-
   const numberOfPage = Math.ceil(count / itemsPerPage);
   const pages = [...Array(numberOfPage).keys()];
   // console.log(count / itemsPerPage);
@@ -35,7 +35,7 @@ const RegisteredCamps = () => {
   //   count();
   // }, [axiosSecure, user?.email]);
   const { data: counts } = useQuery({
-    queryKey: ["count", currentPage],
+    queryKey: ["count", currentPage, allCamps],
     queryFn: async () => {
       const res = await axiosSecure.get(`/campCount?email=${user?.email}`);
       setCount(res.data.count);
@@ -61,8 +61,7 @@ const RegisteredCamps = () => {
       const res = await axiosSecure.get(
         `/participant-camps?email=${user?.email}&page=${currentPage}&size=${itemsPerPage}`
       );
-      console.log(res.data);
-
+      // console.log(res.data);
       setAllCamps(res.data);
       return res.data;
     },
@@ -142,7 +141,7 @@ const RegisteredCamps = () => {
       <div className="w-full  text-center text-2xl md:text-3xl">
         <p className="mb-5 font-medium">Registered Camps</p>
       </div>
-      <Search data={data} setAllCamps={setAllCamps} />
+      <Search data={data} setAllCamps={setAllCamps} setCount={setCount} />
       <div className=" ">
         {/* table */}
         <div className="overflow-x-auto mt-12">
