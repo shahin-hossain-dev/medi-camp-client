@@ -56,7 +56,7 @@ const Register = () => {
               //todo: user post to database
               const user = { name, email, role };
               const res = await axiosPublic.post("/users", user);
-              console.log(res.data);
+              // console.log(res.data);
               // logOut();
               signOut(auth);
               navigate("/join-us");

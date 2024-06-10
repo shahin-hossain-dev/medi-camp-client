@@ -54,7 +54,7 @@ const UpdateCamp = () => {
       return res.data;
     },
     onSuccess: (res) => {
-      console.log(res);
+      // console.log(res);
       if (res.modifiedCount > 0) {
         alert("Camp Updated Successfully", "success");
         refetch();
@@ -86,7 +86,7 @@ const UpdateCamp = () => {
         description,
         healthcareProfessional,
       };
-      console.log(campInfo);
+      // console.log(campInfo);
 
       await mutateAsync(campInfo);
       return;
@@ -115,7 +115,7 @@ const UpdateCamp = () => {
       description,
       healthcareProfessional,
     };
-    console.log(campInfo);
+    // console.log(campInfo);
 
     await mutateAsync(campInfo);
   };

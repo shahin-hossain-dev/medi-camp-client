@@ -22,7 +22,7 @@ const RegisteredCamps = () => {
   const alert = useAlert();
   const navigate = useNavigate();
   const [count, setCount] = useState(0);
-  const [itemsPerPage, setItemPerPage] = useState(5);
+  const [itemsPerPage, setItemPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(0);
   const numberOfPage = Math.ceil(count / itemsPerPage);
   const pages = [...Array(numberOfPage).keys()];

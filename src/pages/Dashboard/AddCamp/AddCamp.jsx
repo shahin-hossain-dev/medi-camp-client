@@ -32,7 +32,7 @@ const AddCamp = () => {
       return res.data;
     },
     onSuccess: (res) => {
-      console.log(res);
+      // console.log(res);
       if (res.insertedId) {
         alert("Camp added Successfully", "success");
       }
@@ -41,7 +41,7 @@ const AddCamp = () => {
   });
 
   const handleAddCamp = async (data) => {
-    console.log(data);
+    // console.log(data);
     const {
       campName,
       description,
