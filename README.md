@@ -1,6 +1,8 @@
 # MediCamp - Medical Camp Management System (MCMS)
 
-## Key Features
+- Live Site: [Medicamp-(MCMS)](https://medi-camp-86354.web.app)
+
+### Here is the most important key features is this app.
 
 - User authentication system Register/Join-us
 - User authorization system
@@ -11,19 +13,27 @@
 - Fully responsive view Mobile/Tablet/Desktop
 - Payment method
 - User can update their profile
--
+- User can search, sort from available camp
 
-## Technoloyg Use
+### Technology Use
 
-- This website is about (MCMS).
-- In Server Side We Used Express JS.
-- MongoDb used With Mongoose for Database.
-- And Fontend made with react Js.
+- In the Client side used React JS
+- In the Server Side We Used Express JS.
+- MongoDb used for Database.
 - User Auth System With Firebase
 
-## Credential Details
+### Packages use in the project
 
-### Admin Credential:
+- TanStack Query
+- Axios
+- React Hook Form
+- Recharts
+- Siwper JS
+- Moment JS
+- React Icon
+- sweetalert2 etc.
+
+## Credential Details
 
 ### Organizer Credential:
 
@@ -34,17 +44,3 @@ organizer@gmail.com
 ```bash
 Aa12*#12
 ```
-
-### HealthCare Professionals Credential:
-
-```bash
-professional@gmail.com
-```
-
-```bash
-4qeaKeRGwi8@iYB
-```
-
-## Live Link
-
-- - Live LInk: [MediCare - Medical Camp Management System (MCMS)](https://medicare-svc.netlify.app/)
