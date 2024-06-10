@@ -9,6 +9,9 @@ import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import moment from "moment";
+import Search from "../../../components/Search/Search";
+import NotFound from "../../../components/NotFound/NotFound";
+import PageOfShow from "../../../components/PageOfShow/PageOfShow";
 
 const ManageCamp = () => {
   const { user } = useAuth();
@@ -66,14 +69,13 @@ const ManageCamp = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
+      background: "linear-gradient(to left top, #0066b2, #003d6b)",
+      color: "White",
     }).then((result) => {
       if (result.isConfirmed) {
         mutateAsync(id);
       }
     });
-    // const remainingJobs = data.filter();
-    // console.log(id);
-    // setAllJobs(remainingJobs);
   };
 
   // pagination handles
@@ -106,7 +108,8 @@ const ManageCamp = () => {
       <div className="w-full  text-center text-2xl md:text-3xl">
         <p className="mb-5 font-medium">All Camps</p>
       </div>
-
+      {/* Search */}
+      <Search data={data} setAllCamps={setAllCamps} />
       <div className=" ">
         {/* table */}
         <div className="overflow-x-auto mt-12">
@@ -147,6 +150,8 @@ const ManageCamp = () => {
               ))}
             </tbody>
           </table>
+          {/* result not found */}
+          <NotFound result={allCamps.length} />
         </div>
       </div>
       {/* pagination buttons */}
@@ -176,6 +181,12 @@ const ManageCamp = () => {
         >
           Next
         </button>
+        <PageOfShow
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          allCamps={data}
+          count={count}
+        />
       </div>
     </div>
   );

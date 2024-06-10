@@ -2,10 +2,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import googleLogo from "../../assets/icons/google.png";
 import useAuth from "../../hooks/useAuth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import useAlert from "../../hooks/useAlert";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const JoinUs = () => {
   const { userLogin, googleLogin } = useAuth();
@@ -16,11 +17,13 @@ const JoinUs = () => {
   const navigate = useNavigate();
   const from = location?.state || "/";
 
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
-  if (user) {
-    navigate(from);
-  }
+  useEffect(() => {
+    if (user) {
+      navigate(from);
+    }
+  }, [user, navigate, from]);
 
   const {
     register,
@@ -70,6 +73,10 @@ const JoinUs = () => {
         setError(error.message);
       });
   };
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div>

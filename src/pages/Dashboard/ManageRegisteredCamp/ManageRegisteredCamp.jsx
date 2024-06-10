@@ -8,6 +8,8 @@ import useAlert from "../../../hooks/useAlert";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Search from "../../../components/Search/Search";
+import PageOfShow from "../../../components/PageOfShow/PageOfShow";
 
 const ManageRegisteredCamp = () => {
   const { user } = useAuth();
@@ -98,9 +100,6 @@ const ManageRegisteredCamp = () => {
         mutateAsync(id);
       }
     });
-    // const remainingJobs = data.filter();
-    // console.log(id);
-    // setAllJobs(remainingJobs);
   };
 
   // pagination handles
@@ -133,6 +132,8 @@ const ManageRegisteredCamp = () => {
       <div className="w-full  text-center text-2xl md:text-3xl">
         <p className="mb-5 font-medium">Registered Camps</p>
       </div>
+      {/* search bar */}
+      <Search data={data} setAllCamps={setAllCamps} />
 
       <div className=" ">
         {/* table */}
@@ -233,6 +234,12 @@ const ManageRegisteredCamp = () => {
         >
           Next
         </button>
+        <PageOfShow
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          allCamps={allCamps}
+          count={count}
+        />
       </div>
     </div>
   );

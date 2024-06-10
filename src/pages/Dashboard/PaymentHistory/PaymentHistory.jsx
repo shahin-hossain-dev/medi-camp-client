@@ -4,6 +4,9 @@ import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import moment from "moment";
+import Search from "../../../components/Search/Search";
+import NotFound from "../../../components/NotFound/NotFound";
+import PageOfShow from "../../../components/PageOfShow/PageOfShow";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -45,13 +48,11 @@ const PaymentHistory = () => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
     }
-    // refetch();
   };
   const handleNextButton = () => {
     if (currentPage < pages.length - 1) {
       setCurrentPage(currentPage + 1);
     }
-    // refetch();
   };
 
   if (isLoading) {
@@ -66,6 +67,7 @@ const PaymentHistory = () => {
       <div className="w-full  text-center text-2xl md:text-3xl">
         <p className="mb-5 font-medium">Payment History</p>
       </div>
+      <Search data={data} setAllCamps={setAllPayments} />
 
       <div className=" ">
         {/* table */}
@@ -118,6 +120,8 @@ const PaymentHistory = () => {
               ))}
             </tbody>
           </table>
+          {/* result not found */}
+          <NotFound result={allPayments.length} />
         </div>
       </div>
       {/* pagination buttons */}
@@ -147,6 +151,12 @@ const PaymentHistory = () => {
         >
           Next
         </button>
+        <PageOfShow
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          allCamps={allPayments}
+          count={count}
+        />
       </div>
     </div>
   );

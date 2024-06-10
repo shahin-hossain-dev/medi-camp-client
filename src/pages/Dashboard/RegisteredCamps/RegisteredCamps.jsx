@@ -10,6 +10,9 @@ import { useNavigate } from "react-router-dom";
 import { VscFeedback } from "react-icons/vsc";
 import FeedbackModal from "../../../components/Modals/FeedbackModal";
 import "./registerCamp.css";
+import Search from "../../../components/Search/Search";
+import NotFound from "../../../components/NotFound/NotFound";
+import PageOfShow from "../../../components/PageOfShow/PageOfShow";
 const RegisteredCamps = () => {
   const { user } = useAuth();
   const [allCamps, setAllCamps] = useState([]);
@@ -52,8 +55,8 @@ const RegisteredCamps = () => {
 
   // --------------------pagination---------------------
 
-  const { data, isLoading, refetch } = useQuery({
-    queryKey: ["applied-data", currentPage],
+  const { data, isLoading } = useQuery({
+    queryKey: ["applied-data", currentPage, itemsPerPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/participant-camps?email=${user?.email}&page=${currentPage}&size=${itemsPerPage}`
@@ -98,9 +101,6 @@ const RegisteredCamps = () => {
         mutateAsync(id);
       }
     });
-    // const remainingJobs = data.filter();
-    // console.log(id);
-    // setAllJobs(remainingJobs);
   };
   const handleFeedbackModal = (camp) => {
     const { campName, campId, _id } = camp;
@@ -142,7 +142,7 @@ const RegisteredCamps = () => {
       <div className="w-full  text-center text-2xl md:text-3xl">
         <p className="mb-5 font-medium">Registered Camps</p>
       </div>
-
+      <Search data={data} setAllCamps={setAllCamps} />
       <div className=" ">
         {/* table */}
         <div className="overflow-x-auto mt-12">
@@ -224,6 +224,8 @@ const RegisteredCamps = () => {
               ))}
             </tbody>
           </table>
+          {/* result not found */}
+          <NotFound result={allCamps.length} />
         </div>
       </div>
       <FeedbackModal feedback={feedback} />
@@ -254,6 +256,13 @@ const RegisteredCamps = () => {
         >
           Next
         </button>
+        {/* todo: count page */}
+        <PageOfShow
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          allCamps={allCamps}
+          count={count}
+        />
       </div>
     </div>
   );
