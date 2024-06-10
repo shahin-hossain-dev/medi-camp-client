@@ -28,7 +28,7 @@ const Banner = () => {
       >
         {bannerData.map((slide) => (
           <SwiperSlide key={slide.id}>
-            <div className="flex items-center justify-between ">
+            <div className="flex items-center justify-between h-[300px]  lg:h-[500px]">
               <div className="absolute md:hidden flex justify-center items-center min-h-full w-full bg-[#00000099] ">
                 <h2 className="text-3xl px-5 text-center font-bold text-[#ffffff]">
                   {slide.title}
@@ -44,17 +44,17 @@ const Banner = () => {
                   <FaRegCalendarCheck className="text-[#003d6b]" />{" "}
                   <span>{slide.date}</span>
                 </span>
-                <img
+                {/* <img
                   src={logo1}
                   alt=""
                   className="absolute right-20 -bottom-10 w-[150px]"
-                />
+                /> */}
               </div>
               <div className="flex-1  h-full">
                 <img
                   src={slide.image_url}
                   alt=""
-                  className="w-full ms-auto h-[300px] mt-0 object-cover lg:w-[700px] lg:h-[500px] "
+                  className="w-full ms-auto h-full  mt-0 object-cover lg:w-[700px] lg:h-[500px] "
                 />
               </div>
             </div>

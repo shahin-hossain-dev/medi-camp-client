@@ -163,9 +163,9 @@ const Register = () => {
                   type="password"
                   {...register("password", {
                     required: true,
-                    // minLength: 6,
-                    // maxLength: 16,
-                    // pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                    minLength: 6,
+                    maxLength: 16,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
                   })}
                   name="password"
                   placeholder="password"

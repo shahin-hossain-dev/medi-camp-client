@@ -1,8 +1,50 @@
-# React + Vite
+# MediCamp - Medical Camp Management System (MCMS)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Key Features
 
-Currently, two official plugins are available:
+- User authentication system Register/Join-us
+- User authorization system
+- Participants can send join request with payment
+- Participants can give feedback
+- Organizers can Add Camps
+- Organizers can Manage Camps
+- Fully responsive view Mobile/Tablet/Desktop
+- Payment method
+- User can update their profile
+-
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technoloyg Use
+
+- This website is about (MCMS).
+- In Server Side We Used Express JS.
+- MongoDb used With Mongoose for Database.
+- And Fontend made with react Js.
+- User Auth System With Firebase
+
+## Credential Details
+
+### Admin Credential:
+
+### Organizer Credential:
+
+```bash
+organizer@gmail.com
+```
+
+```bash
+Aa12*#12
+```
+
+### HealthCare Professionals Credential:
+
+```bash
+professional@gmail.com
+```
+
+```bash
+4qeaKeRGwi8@iYB
+```
+
+## Live Link
+
+- - Live LInk: [MediCare - Medical Camp Management System (MCMS)](https://medicare-svc.netlify.app/)
