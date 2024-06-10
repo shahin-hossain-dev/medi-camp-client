@@ -18,7 +18,7 @@ const UserProfile = () => {
           <div className="flex justify-center">
             <img
               src={user?.photoURL}
-              className="rounded-full w-[140px] border-white border-4"
+              className="rounded-full w-[140px] h-[140px] object-cover border-white border-4"
               alt=""
             />
           </div>

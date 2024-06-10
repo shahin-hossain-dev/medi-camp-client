@@ -17,13 +17,7 @@ const JoinUs = () => {
   const navigate = useNavigate();
   const from = location?.state || "/";
 
-  const { user, loading } = useAuth();
-
-  useEffect(() => {
-    if (user) {
-      navigate(from);
-    }
-  }, [user, navigate, from]);
+  const { loading } = useAuth();
 
   const {
     register,
