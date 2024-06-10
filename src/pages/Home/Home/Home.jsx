@@ -1,3 +1,4 @@
+import AskQuestions from "../AskQuestions/AskQuestions";
 import Banner from "../Banner/Banner";
 import PopularCamp from "../PopularCamp/PopularCamp";
 import Testimonials from "../Testimonials/Testimonials";
@@ -8,6 +9,7 @@ const Home = () => {
       <Banner />
       <PopularCamp />
       <Testimonials />
+      <AskQuestions />
     </div>
   );
 };

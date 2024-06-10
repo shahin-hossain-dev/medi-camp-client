@@ -1,0 +1,24 @@
+ [
+      {
+        "id": 1,
+        "question": "How do I Register for a Medical Camp",
+        "answer": "Registration for our medical camps can be done through our website. Simply visit the event page of the camp you're interested in and follow the registration instructions provided there."
+      },
+      {
+        "id": 2,
+        "question": "Are these medical camp are free or charges?",
+        "answer": "Yes, all our medical camps are free for participants. We believe in providing accessible healthcare services to all members of the community without any financial barriers."
+      },
+      {
+        "id": 3,
+        "question": "Can I Volunteer for Medical camps?",
+        "answer": "Absolutely! We welcome volunteers who are passionate about contributing to community health. You can find volunteer opportunities listed on the respective event pages or reach out to us directly for more information on how to get involved."
+      },
+      {
+        "id": 4,
+        "question": "What should I bring to the medical camp?",
+        "answer": "Please bring a valid ID, any medical records you have, and a list of current medications you are taking. If you have an insurance card, please bring that as well, although it is not required for receiving services."
+      }
+]
+
+  

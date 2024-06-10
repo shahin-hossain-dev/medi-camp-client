@@ -18,11 +18,13 @@ import RegisteredCamps from "../pages/Dashboard/RegisteredCamps/RegisteredCamps"
 import ParticipantProfile from "../pages/Dashboard/ParticipantProfile/ParticipantProfile";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import OrganizerRoute from "./OrganizerRoute";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",

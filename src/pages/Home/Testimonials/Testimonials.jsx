@@ -28,10 +28,10 @@ const Testimonials = () => {
     return <LoadingSpinner />;
   }
   return (
-    <div className="mt-24">
-      <div className=" mb-12 md:mt-24 text-center space-y-4 md:w-1/2 mx-auto">
+    <div className="mt-24 w-[90%] mx-auto ">
+      <div className=" mb-12 md:mt-24 text-center space-y-4 md:w-1/2 mx-auto ">
         <h2 className="text-2xl md:text-4xl font-bold text-[#003d6b]">
-          <span className="text-[#efb312]">Testimonials</span>
+          <span className="text-[#0066b2]">Testimonials</span>
         </h2>
         <p className="px-10 text-slate-500">
           Testimonials offer genuine feedback and highlight our impact.
@@ -52,7 +52,7 @@ const Testimonials = () => {
       >
         {testimonials.map((feedback) => (
           <SwiperSlide key={feedback._id}>
-            <div className="text-center py-10 bg-slate-200">
+            <div className="text-center py-12 bg-slate-200 rounded-md">
               <div className="flex justify-center items-center mb-3">
                 <Rating
                   style={{ maxWidth: 180 }}
