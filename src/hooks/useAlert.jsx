@@ -6,7 +6,7 @@ const useAlert = () => {
       title: title,
       icon: iconType,
       showConfirmButton: false,
-      timer: 1500,
+      timer: 2000,
       background: "linear-gradient(to left top, #0066b2, #003d6b)",
       color: "White",
       width: "25em",

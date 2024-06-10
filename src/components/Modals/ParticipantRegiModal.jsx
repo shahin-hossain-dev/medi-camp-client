@@ -28,7 +28,7 @@ const ParticipantRegiModal = ({ camp, refetch }) => {
       return res.data;
     },
     onSuccess: (res) => {
-      console.log(res);
+      // console.log(res);
       document.getElementById("participant-register-modal").close();
       if (res.insertedId) {
         refetch();

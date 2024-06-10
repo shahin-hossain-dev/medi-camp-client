@@ -27,7 +27,7 @@ const CheckoutForm = ({ campId }) => {
     queryKey: ["paymentCamp"],
     queryFn: async () => {
       const res = await axiosSecure(`/registered-camp/${campId}`);
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });
@@ -108,15 +108,17 @@ const CheckoutForm = ({ campId }) => {
           campId: camp?.campId,
           paymentStatus: true,
         };
-        // console.log(payment);
 
         const res = await axiosSecure.post(`/payments/${camp._id}`, payment);
-        console.log("payment saved", res.data);
-        refetch();
+        // console.log("payment saved", res.data);
+
         if (res.data?.insertedId) {
-          alert("Thank you for your Join", "success");
-          navigate("/dashboard/payment-history");
+          navigate("/dashboard/payment-history", {
+            state: { transactionId: paymentIntent.id },
+          });
+          alert(`Thank You For Joining`, "success");
         }
+        refetch();
       }
     }
   };

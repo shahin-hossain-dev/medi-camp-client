@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -7,14 +7,17 @@ import moment from "moment";
 import Search from "../../../components/Search/Search";
 import NotFound from "../../../components/NotFound/NotFound";
 import PageOfShow from "../../../components/PageOfShow/PageOfShow";
+import { useLocation } from "react-router-dom";
 
 const PaymentHistory = () => {
   const { user, loading } = useAuth();
   const [allPayments, setAllPayments] = useState([]);
   const axiosSecure = useAxiosSecure();
   const [count, setCount] = useState(0);
-  const [itemsPerPage, setItemPerPage] = useState(5);
+  const [itemsPerPage, setItemPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(0);
+
+  const location = useLocation();
 
   const numberOfPage = Math.ceil(count / itemsPerPage);
   const pages = [...Array(numberOfPage).keys()];
@@ -23,7 +26,7 @@ const PaymentHistory = () => {
     queryKey: ["count", currentPage],
     queryFn: async () => {
       const res = await axiosSecure.get(`/paymentCount?email=${user?.email}`);
-      console.log(res.data.count);
+      // console.log(res.data.count);
       setCount(res.data.count);
       return res.data.count;
     },
@@ -72,6 +75,12 @@ const PaymentHistory = () => {
       <div className=" ">
         {/* table */}
         <div className="overflow-x-auto mt-12">
+          {location?.state?.transactionId && (
+            <p className="bg-green-200 px-3 rounded-md my-2 py-1">
+              New Transition Id: {location?.state?.transactionId}
+            </p>
+          )}
+
           <table className="table">
             {/* head */}
             <thead>
