@@ -19,6 +19,7 @@ import ParticipantProfile from "../pages/Dashboard/ParticipantProfile/Participan
 import Payment from "../pages/Dashboard/Payment/Payment";
 import OrganizerRoute from "./OrganizerRoute";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        path: "/dashboard",
+        element: <DashboardHome />,
+      },
       {
         path: "organizer-profile",
         element: <OrganizerProfile />,

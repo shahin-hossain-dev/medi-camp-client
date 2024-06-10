@@ -60,9 +60,11 @@ const Testimonials = () => {
                   readOnly
                 />
               </div>
-              <div className="md:w-2/3 mx-auto ">
-                <h3 className="text-2xl mb-5">{feedback.feedbackMessage}</h3>
-                <p className="text-xl mb-3  text-slate-500">
+              <div className="md:w-2/3 mx-auto  px-5">
+                <h3 className="text-xl md:text-2xl mb-5">
+                  {feedback.feedbackMessage}
+                </h3>
+                <p className="text-lg md:text-xl mb-3  text-slate-500">
                   {feedback.campName}
                 </p>
                 <div className="flex items-center gap-2 justify-center">

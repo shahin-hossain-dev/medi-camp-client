@@ -13,7 +13,7 @@ const AskQuestions = () => {
   }, []);
 
   return (
-    <div className="w-[90%] mx-auto">
+    <div className="w-[90%] mx-auto mt-12 md:mt-24">
       <div className=" mb-12 md:mt-24 text-center space-y-4 md:w-1/2 mx-auto">
         <h2 className="text-2xl md:text-4xl font-bold text-[#003d6b]">
           <span className="text-[#0066b2]">Frequently asked questions</span>
@@ -34,10 +34,10 @@ const AskQuestions = () => {
               className="collapse collapse-arrow join-item border border-base-300"
             >
               <input type="radio" name="my-accordion-4" defaultChecked />
-              <div className="collapse-title text-xl font-medium text-neutral-700">
+              <div className="collapse-title text-lg md:text-xl font-medium text-neutral-700">
                 {question.question}
               </div>
-              <div className="collapse-content text-neutral-500">
+              <div className="collapse-content  text-neutral-500">
                 <p>{question.answer}</p>
               </div>
             </div>

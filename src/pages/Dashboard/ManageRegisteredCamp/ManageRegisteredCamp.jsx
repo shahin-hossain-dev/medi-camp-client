@@ -1,18 +1,15 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import { FaEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import Swal from "sweetalert2";
 import useAlert from "../../../hooks/useAlert";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
-import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Search from "../../../components/Search/Search";
 import PageOfShow from "../../../components/PageOfShow/PageOfShow";
+import NotFound from "../../../components/NotFound/NotFound";
 
 const ManageRegisteredCamp = () => {
-  const { user } = useAuth();
   const [allCamps, setAllCamps] = useState([]);
   const axiosSecure = useAxiosSecure();
   const alert = useAlert();
@@ -39,7 +36,7 @@ const ManageRegisteredCamp = () => {
   });
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["applied-data", currentPage],
+    queryKey: ["registeredCamp", currentPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/registered-camps?page=${currentPage}&size=${itemsPerPage}`
@@ -205,6 +202,7 @@ const ManageRegisteredCamp = () => {
               ))}
             </tbody>
           </table>
+          <NotFound result={allCamps.length} />
         </div>
       </div>
       {/* pagination buttons */}

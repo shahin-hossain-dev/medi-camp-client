@@ -64,7 +64,7 @@ const JoinUs = () => {
           const email = loggedUser?.email;
           const user = { name, email, role: "participant" };
           const res = await axiosPublic.post("/users", user);
-          console.log(res.data);
+          // console.log(res.data);
           alert("Login Successfully", "success");
           navigate(from);
         }
@@ -81,7 +81,7 @@ const JoinUs = () => {
   return (
     <div>
       <div className=" w-full flex justify-center items-center">
-        <div className="hero-content mx-10 md:mx-0 w-full md:w-1/2 lg:w-1/3">
+        <div className="hero-content lg:mx-10 md:mx-0 w-full md:w-1/2 lg:w-1/3">
           <div className="card border rounded-md w-full shadow-2xl bg-base-100 p-6 text-center">
             <h1 className="text-3xl font-bold">Join Us</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="w-full">

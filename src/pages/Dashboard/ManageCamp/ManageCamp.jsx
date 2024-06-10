@@ -37,7 +37,7 @@ const ManageCamp = () => {
   });
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["applied-data", currentPage],
+    queryKey: ["organizerCamp", currentPage],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/organizer-camp?email=${user?.email}&page=${currentPage}&size=${itemsPerPage}`

@@ -33,7 +33,7 @@ const Dashboard = () => {
         <div className="flex gap-3 items-center px-5">
           <div>
             <Link to={"/"}>
-              <button className="text-sm btn btn-sm font-medium border-0 text-[#D1D5DB] rounded-sm bg-gradient-to-br from-[#0066b2] to-[#003d6b] hover:bg-gradient-to-bl  ">
+              <button className="text-sm btn btn-sm font-medium border-0 text-[#D1D5DB] rounded-md bg-[#003d6b]   hover:bg-[#0066b2]  ">
                 <FaHome />
                 View Home
               </button>
