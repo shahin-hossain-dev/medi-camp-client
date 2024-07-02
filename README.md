@@ -59,7 +59,10 @@ then your have to enter the folder location with your command line and install d
 ```bash
 npm install
 ```
-step 4: You have to make .env.local in your folder root level and need some credentials, you can make your own firebase credentials, optionally IMAGE_HOSTING_KEY or API_KEY with [imgbb](https://imgbb.com/) and stripe Payment_Gateway_PK
+step 4: You have to make .env.local in your folder root level and need some credentials, you can make your own 
+- firebase credentials accroding to firebase.config.js
+- optionally IMAGE_HOSTING_KEY  with [imgbb](https://imgbb.com/) and
+- stripe Payment_Gateway_PK
 
 step 5: You have backend integration with this clinet that instruction is [here](https://github.com/shahin-hossain-dev/medi-camp-server) 
 
