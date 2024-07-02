@@ -44,7 +44,7 @@ organizer@gmail.com
 ```bash
 Aa12*#12
 ```
-### How to run this project locally:
+## How to run this project locally:
 If you run this project locally you hove to follow these steps below
 step 1: You have node js environment in your local machine 
 stpe 2: You have to install nodemon globally in your local machine
