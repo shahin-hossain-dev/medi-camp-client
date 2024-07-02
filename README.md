@@ -44,3 +44,28 @@ organizer@gmail.com
 ```bash
 Aa12*#12
 ```
+### How to run this project locally:
+If you run this project locally you hove to follow these steps below
+step 1: You have node js environment in your local machine 
+stpe 2: You have to install nodemon globally in your local machine
+
+step 3: You have to clone this repository to your local machine 
+
+```bash
+git clone https://github.com/shahin-hossain-dev/medi-camp-client.git
+```
+then your have to enter the folder location with your command line and install dependencies you use this command below
+
+```bash
+npm install
+```
+step 4: You have to make .env.local in your folder root level and need some credentials, you can make your own firebase credentials, optionally IMAGE_HOSTING_KEY or API_KEY with [imgbb](https://imgbb.com/) and stripe Payment_Gateway_PK
+
+step 5: You have backend integration with this clinet that instruction is [here](https://github.com/shahin-hossain-dev/medi-camp-server) 
+
+step 6: Make sure these credentials now you could run this project
+
+```bash
+npm run dev
+```
+ ## enjoy
