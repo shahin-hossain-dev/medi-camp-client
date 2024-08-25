@@ -65,17 +65,19 @@ const CampDetails = () => {
             {date}
           </span>
         </div>
-        <button
-          onClick={() =>
-            document.getElementById("participant-register-modal").showModal()
-          }
-          className={`btn text-[#ffffff]  rounded-sm ${
-            user ? "bg-gradient-to-br from-[#0066b2] to-[#003d6b]" : ""
-          }`}
-          disabled={!user}
-        >
-          Join Camp
-        </button>
+        <div title={user ? "Join a Camp" : "Please Join Us"}>
+          <button
+            onClick={() =>
+              document.getElementById("participant-register-modal").showModal()
+            }
+            className={`btn text-[#ffffff]  rounded-sm ${
+              user ? "bg-gradient-to-br from-[#0066b2] to-[#003d6b]" : ""
+            }`}
+            disabled={!user}
+          >
+            Join Camp
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 place-items-center-start">

@@ -25,10 +25,19 @@ const Navbar = () => {
       <li>
         <ActiveLink to={"/available-camps"}>Available Camps</ActiveLink>
       </li>
+      <li>
+        <ActiveLink to={"/about-us"}>About Us</ActiveLink>
+      </li>
+      <li>
+        <ActiveLink to={"/about-us"}>Blog</ActiveLink>
+      </li>
+      <li>
+        <ActiveLink to={"/about-us"}>Gallery</ActiveLink>
+      </li>
     </>
   );
   return (
-    <div className="navbar md:px-5 py-5 bg-gradient-to-br from-[#0066b2] to-[#003d6b]">
+    <div className="navbar md:px-5 py-3 bg-gradient-to-br from-[#0066b2] to-[#003d6b]">
       <div className="navbar-start">
         <div className="dropdown ">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
