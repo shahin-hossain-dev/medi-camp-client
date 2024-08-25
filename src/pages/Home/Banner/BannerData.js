@@ -1,5 +1,5 @@
 import camp1 from "../../../assets/banner/camp-1.jpg";
-import camp2 from "../../../assets/banner/camp-2.webp";
+import camp2 from "../../../assets/banner/camp-2.jpg";
 import camp3 from "../../../assets/banner/camp-3.jpg";
 // import camp4 from "../../../assets/banner/camp-4.webp";
 
