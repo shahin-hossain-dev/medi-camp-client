@@ -5,6 +5,11 @@ import { FaUsers } from "react-icons/fa";
 import { FaUserDoctor } from "react-icons/fa6";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
+// ..
+AOS.init();
+
 const styles = {
   clipPath: "polygon(0% 0%, 100% 0, 99% 100%, 77% 93%, 0% 100%)",
 };
@@ -24,7 +29,10 @@ const PopularCampCard = ({ camp }) => {
 
   const date = moment(dateAndTime).format("DD/MM/YYYY, hh:mm a");
   return (
-    <div className="card card-compact rounded-none shadow-xl">
+    <div
+      className="card card-compact rounded-none shadow-xl"
+      data-aos="fade-up"
+    >
       <figure>
         <img
           style={styles}
