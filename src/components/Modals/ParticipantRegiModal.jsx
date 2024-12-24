@@ -32,7 +32,7 @@ const ParticipantRegiModal = ({ camp, refetch }) => {
       document.getElementById("participant-register-modal").close();
       if (res.insertedId) {
         refetch();
-        alert("Participant Request Sent", "success");
+        alert("Request Sent, Go dashboard for pay", "success");
       }
     },
   });

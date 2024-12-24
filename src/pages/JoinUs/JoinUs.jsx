@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import googleLogo from "../../assets/icons/google.png";
 import useAuth from "../../hooks/useAuth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import useAlert from "../../hooks/useAlert";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
@@ -10,18 +10,22 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const JoinUs = () => {
   const { userLogin, googleLogin } = useAuth();
+  const [visit, setVisit] = useState({
+    email: "",
+    password: "",
+  });
   const axiosPublic = useAxiosPublic();
   const alert = useAlert();
   const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
   const from = location?.state || "/";
-
   const { loading } = useAuth();
 
   const {
     register,
     handleSubmit,
+    setValue,
     // watch,
     formState: { errors },
     // reset,
@@ -57,7 +61,7 @@ const JoinUs = () => {
           const name = loggedUser?.displayName;
           const email = loggedUser?.email;
           const user = { name, email, role: "participant" };
-          const res = await axiosPublic.post("/users", user);
+          await axiosPublic.post("/users", user);
           // console.log(res.data);
           alert("Login Successfully", "success");
           navigate(from);
@@ -68,13 +72,38 @@ const JoinUs = () => {
       });
   };
 
+  const handleUserVisit = (userType) => {
+    if (userType === "user") {
+      setValue("email", "user@gmail.com");
+      setValue("password", "Aa12*#12");
+    } else {
+      setValue("email", "organizer@gmail.com");
+      setValue("password", "Aa12*#12");
+    }
+  };
+
   if (loading) {
     return <LoadingSpinner />;
   }
 
   return (
     <div>
-      <div className=" w-full flex justify-center items-center">
+      <div className=" w-full flex flex-col md:flex-row justify-center items-center">
+        <div className="space-y-2">
+          <h3 className="font-semibold text-xl">Click to Visit</h3>
+          <button
+            onClick={() => handleUserVisit("user")}
+            className="btn btn-warning block btn-sm"
+          >
+            Join As a User
+          </button>
+          <button
+            onClick={() => handleUserVisit("organizer")}
+            className="btn btn-error block btn-sm"
+          >
+            Join As a Organizer
+          </button>
+        </div>
         <div className="hero-content lg:mx-10 md:mx-0 w-full md:w-1/2 lg:w-1/3">
           <div className="card border rounded-md w-full shadow-2xl bg-base-100 p-6 text-center">
             <h1 className="text-3xl font-bold">Join Us</h1>
@@ -148,6 +177,7 @@ const JoinUs = () => {
                 />
               </div>
             </form>
+
             <p className="py-3">
               <small>
                 Don&apos;t have any account. Please{" "}

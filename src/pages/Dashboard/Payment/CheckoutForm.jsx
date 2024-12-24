@@ -164,6 +164,22 @@ const CheckoutForm = ({ campId }) => {
             <p className="text-green-700">Transaction Id: {transactionId}</p>
           )}
         </form>
+        <div className="border bg-slate-200 rounded p-2 text-sm">
+          <p className="font-semibold">test card: </p>
+          <p>
+            <span className="font-medium">Card Number:</span> 4242 4242 4242
+            4242
+          </p>
+          <p>
+            <span className="font-medium">MM/YY:</span> 02/30
+          </p>
+          <p>
+            <span className="font-medium">CVC:</span> 123
+          </p>
+          <p>
+            <span className="font-medium">Zip:</span> 12345
+          </p>
+        </div>
       </div>
     </div>
   );
